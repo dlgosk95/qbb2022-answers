@@ -2,7 +2,7 @@
 
 # QBB2022 - Day 1 - Lunch Exercises Submission
 
- 1. I’m excited to learn Unix.
+ 1. I am excited to learn Unix.
 a.
  cp ~/data/bed_files/exons.chr21.bed .
  cp ~/data/bed_files/genes.chr21.bed .
