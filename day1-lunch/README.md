@@ -4,8 +4,9 @@
 
  1. I am excited to learn Unix.
 a.
- cp ~/data/bed_files/exons.chr21.bed .
- cp ~/data/bed_files/genes.chr21.bed .
+change directory to day1-lunch
+cp ~/data/bed_files/exons.chr21.bed .
+cp ~/data/bed_files/genes.chr21.bed .
 
 b. 
 13653/219
@@ -17,6 +18,7 @@ c.
 I would sort and collapse the same things using
 sort filename | uniq -c
 will tell us the number and the name
+find #  of exons for each gene Sort Find what is most common
 
 a.
 cp ~/data/bed_files/chromHMM.E116_15_coreMarks_hg38lift_stateno.chr21.bed .
@@ -40,37 +42,24 @@ sort column4 | uniq -c
  156 8
  654 9
  
-c.
-Go through the first column and find the biggest number, which is 1050. Its second column is 7, so the state 7 comprises the largest fraction of the genome. 
-
+c. 
+substract third and second columns to find the size
+sort by state 
+add the same state's size
+and find the largest.
 
 a.
 (base) [~/qbb2022-answers/day1-lunch $]cp ~/data/metadata_and_txt_files/integrated_call_samples.panel .
 
 b.
-(base) [~/qbb2022-answers/day1-lunch $]grep AFR integrated_call_samples.panel | cut -f 2 | uniq -c
- 90 ACB
-   6 GWD
-  31 ACB
-  12 GWD
-   2 ACB
- 126 GWD
-  33 ESN
-  21 GWD
-  35 MSL
-  70 ESN
-   4 MSL
-  12 GWD
-  55 ESN
-  65 MSL
-  15 ESN
-   3 GWD
-  24 MSL
-  77 YRI
-  23 LWK
- 129 YRI
-  99 LWK
- 112 ASW
+grep AFR integrated_call_samples.panel | cut -f 2 | sort -k 2 |  uniq -c 90 ACB
+  123 ACB
+  112 ASW
+  173 ESN
+  180 GWD
+  122 LWK
+  128 MSL
+  206 YRI
 
 c.
 (base) [~/qbb2022-answers/day1-lunch $]sort -k 3 integrated_call_samples.panel | cut -f 3 | uniq -c
