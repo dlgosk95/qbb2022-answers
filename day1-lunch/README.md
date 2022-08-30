@@ -69,6 +69,7 @@ c.
  670 EUR
  661 SAS
    1 super_pop
+
 a.
 (base) [~/qbb2022-answers/day1-lunch $]cp ~/data/vcf_files/random_snippet.vcf .
 
