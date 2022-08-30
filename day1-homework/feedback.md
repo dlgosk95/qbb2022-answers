@@ -13,3 +13,6 @@ In progress...
 
 Looks great! Good use of pseudocode in the first part.
 
+
+Same comment as the lunch exercise about formatting markdown files...will be easier to read if you enclose code blocks with triple backticks: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks
+
