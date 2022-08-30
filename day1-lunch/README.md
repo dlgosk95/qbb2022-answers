@@ -62,7 +62,7 @@ grep AFR integrated_call_samples.panel | cut -f 2 | sort -k 2 |  uniq -c 90 ACB
   206 YRI
 
 c.
-(base) [~/qbb2022-answers/day1-lunch $]sort -k 3 integrated_call_samples.panel | cut -f 3 | uniq -c
+(base) \[~/qbb2022-answers/day1-lunch $]sort -k 3 integrated_call_samples.panel | cut -f 3 | uniq -c
 1044 AFR
  535 AMR
  673 EAS
