@@ -43,7 +43,6 @@ Considering  T
  bedtools intersect -a $vcffile -b $promoter -wa > intersect.vcf
  
  
- 
  Exercise 3
  
  #!/bin/bash
