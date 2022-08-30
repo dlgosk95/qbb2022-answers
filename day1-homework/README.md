@@ -29,7 +29,7 @@ Considering  T
 1317 C
  386 G
  
- Yes it answers if Reference is A (or c or g or T) how many there are alternative SNPs
+ Yes it answers if Reference is A (or c or g or T) how many there are alternative SNPs Transversion
  
  No promoter parts are not clear. I assume promoters to be including and upstream of TSS. 
  
