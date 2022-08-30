@@ -1,6 +1,6 @@
 # qbb 2022 day 1 homework
 
-# !/bin/bash
+#!/bin/bash
 #USAGE: bash exercise1.sh input_VCF
 
 vcffile=$1
