@@ -81,3 +81,4 @@ sort -k7 closest.bed | cut -f 7 | uniq -c | wc -l
 200
 which is genes
 the average is 10293/200
+
