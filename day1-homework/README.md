@@ -40,6 +40,7 @@ Considering  T
  promoter=/Users/cmdb/qbb2022-answers/day1-homework/promoter.bed
 
  bedtools intersect -a $vcffile -b $promoter -wa > intersect.vcf
+I need to  put results.
  
  
  Exercise 3
