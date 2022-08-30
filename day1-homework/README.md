@@ -76,6 +76,8 @@ bedtools closest -a variants.sorted.bed -b genes.sorted.bed > closest.bed
 
 (base) [~/qbb2022-answers/day1-homework $]wc -l closest.bed 
 10293 closest.bed
+which is variants
 sort -k7 closest.bed | cut -f 7 | uniq -c | wc -l
 200
+which is genes
 the average is 10293/200
