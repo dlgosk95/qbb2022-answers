@@ -1,5 +1,6 @@
  # QBB2022 - Day 2 - Homework Excercises Submission
 #!/usr/bin/env python3
+# usage: vcfParser.py
 
 import sys
 
@@ -100,7 +101,7 @@ def parse_vcf(fname): #define function parse_vcf to argument fname
         print(f"There were {malformed} malformed entries", file=sys.stderr)
     return vcf # close function
 
-if __name__ == "__main__": # making this scrip executable
+if __name__ == "__main__": # making this scrip executable or be able to imported
     fname = sys.argv[1] # user input filename
     vcf = parse_vcf(fname) # run function on this file
     for i in range(10): # print 10 column 
@@ -123,13 +124,11 @@ second_file = "/Users/cmdb/qbb2022-answers/day2-homework.dbSNP_snippet.vcf"
 
 
 from vcfParser import *
+#import vcfParser and everytime call function vcfParser.parse_vcf
+#from vcfParser import parse_vcf
 rand = parse_vcf('random_snippet.vcf')
 fs = open('dbSNP_snippet.vcf', 'r')
-
-
-from vcfParser import *
-rand = parse_vcf('random_snippet.vcf')
-fs = open('dbSNP_snippet.vcf', 'r')
+counter = 0
 
 snp ={}
 for i, line in enumerate(fs):
@@ -141,5 +140,16 @@ for i, line in enumerate(fs):
         position = fields[1]
         identification = fields[2]
         snp[position]=identification
-    for k, v in snp: #TypeError: cannot unpack non-iterable int object
-        print (k,v)
+#print (snp)
+
+    for position, identification in snp.items(): #TypeError: cannot unpack non-iterable int object
+    #for position in snp.keys():
+        if position == rand[1][1]:
+            rand[1][2] = identification
+        else:
+            continue
+print (rand)
+        
+#very inefficient because it has to go through all length of dictionary(n) as well as vcf (m) so it ran n*m 
+#id = mapping[vcf[1][1]]
+#vcf[1]
