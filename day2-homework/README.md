@@ -142,14 +142,27 @@ for i, line in enumerate(fs):
         snp[position]=identification
 #print (snp)
 
-    for position, identification in snp.items(): #TypeError: cannot unpack non-iterable int object
-    #for position in snp.keys():
-        if position == rand[1][1]:
-            rand[1][2] = identification
-        else:
-            continue
-print (rand)
-        
+#for position, identification in snp.items(): 
+
+#for position in snp.keys():
+#   if position == rand[1][1]:
+#       rand[1][2] = identification
+#   else:
+#       continue
+
 #very inefficient because it has to go through all length of dictionary(n) as well as vcf (m) so it ran n*m 
-#id = mapping[vcf[1][1]]
-#vcf[1]
+
+
+
+for i in range(1,len(rand)):
+    record = rand[i]
+    pos = record [1]
+    #if pos in snp:
+        #iden = snp[pos]
+        #rand[i][2] = iden
+    try:
+        rand[i][2] = snp[pos]
+    except:
+        counter+=1
+
+print (rand, counter)
