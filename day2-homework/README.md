@@ -136,6 +136,7 @@ for i in fs:
     position = fields[1]
     identifaction = field[2]
     snp[position]=identication# goal is to replace ID from db to random snippet if it has correct position
+# goal is to replace ID from db to random snippet if it has correct position
 # make dictionaries position:id from dbSNP
 # compare with random
 
@@ -148,14 +149,20 @@ from vcfParser import *
 rand = parse_vcf('random_snippet.vcf')
 fs = open('dbSNP_snippet.vcf', 'r')
 
+
+from vcfParser import *
+rand = parse_vcf('random_snippet.vcf')
+fs = open('dbSNP_snippet.vcf', 'r')
+
 snp ={}
-for i in fs:
-    if line.startswith("#")
+for i, line in enumerate(fs):
+    if line.startswith("#"):
         continue
     else:
-    fields = line.strip().split('\t')
-    field[1] = int(field(1))
-    field[2] = int(field(2))
-    position = fields[1]
-    identifaction = field[2]
-    snp[position]=identication
+        fields = line.strip().split('\t')
+        fields[1] = int(fields[1])
+        position = fields[1]
+        identification = fields[2]
+        snp[position]=identification
+    for k, v in snp: #TypeError: cannot unpack non-iterable int object
+        print (k,v)
