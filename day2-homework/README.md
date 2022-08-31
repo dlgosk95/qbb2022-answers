@@ -3,7 +3,7 @@
 
 import sys
 
-def parse_vcf(fname):
+def parse_vcf(fname): #define function parse_vcf to argument fname
     vcf = []
     info_description = {}
     info_type = {}
@@ -112,30 +112,7 @@ if __name__ == "__main__": # making this scrip executable
 		
 		
 		
-# goal is to replace ID from db to random snippet if it has correct position
-# make dictionaries position:id from dbSNP
-# compare with random
 
-first_file = "/Users/cmdb/qbb2022-answers/day2-homework/random_snippet.vcf"
-second_file = "/Users/cmdb/qbb2022-answers/day2-homework.dbSNP_snippet.vcf"
-
-
-
-from vcfParser import *
-rand = parse_vcf('random_snippet.vcf')
-fs = open('dbSNP_snippet.vcf', 'r')
-
-snp ={}
-for i in fs:
-    if line.startswith("#")
-        continue
-    else:
-    fields = line.strip().split('\t')
-    field[1] = int(field(1))
-    field[2] = int(field(2))
-    position = fields[1]
-    identifaction = field[2]
-    snp[position]=identication# goal is to replace ID from db to random snippet if it has correct position
 # goal is to replace ID from db to random snippet if it has correct position
 # make dictionaries position:id from dbSNP
 # compare with random
