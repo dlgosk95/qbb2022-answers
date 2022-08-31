@@ -116,7 +116,8 @@ if __name__ == "__main__": # making this scrip executable or be able to imported
 
 # goal is to replace ID from db to random snippet if it has correct position
 # make dictionaries position:id from dbSNP
-# compare with random
+# compare with random snippet and replace
+# counter if not replaced
 
 first_file = "/Users/cmdb/qbb2022-answers/day2-homework/random_snippet.vcf"
 second_file = "/Users/cmdb/qbb2022-answers/day2-homework.dbSNP_snippet.vcf"
