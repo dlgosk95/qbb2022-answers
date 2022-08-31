@@ -166,3 +166,5 @@ for i in range(1,len(rand)):
         counter+=1
 
 print (rand, counter)
+
+#counter is 78
