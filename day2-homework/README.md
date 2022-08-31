@@ -107,7 +107,7 @@ if __name__ == "__main__": # making this scrip executable or be able to imported
     for i in range(10): # print 10 column 
         print(vcf[i])
 		
-		
+		git
 		
 		
 		
