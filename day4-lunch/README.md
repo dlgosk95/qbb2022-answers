@@ -144,7 +144,7 @@ awk
          - Use grep to extract Chromosome 21 from gtf file to create subset gtf file
 		 - Use grep to extract name, position start, position end of the specific gene_type (protein_coding processed_pseudogene and lncRNA) from the subset gft file to create bed file
 	2. Subset .vcf for each feature
-	     - Run do_all.sh
+	     - Run within do_all.sh
 		 - Use bedtools to sort and intersect the vcf file and bed file based on gene type, and save as a vcf file
 	3. Create histogram plots of Allele count for each .vcf
 		- Run plot_vcf_ac.py
