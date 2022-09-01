@@ -28,6 +28,7 @@ plt.savefig("ex2_b.png")
 
 plt.show()
 
+There are three clusters, which may indicate genetic similarity within clusters.
 
 exercise 3
 
@@ -46,10 +47,10 @@ for sex in unique_gender:
     row = np.where(eigenvec["gender"] == sex)
     subset_data = eigenvec[row]
     ax.scatter(subset_data["x"], subset_data["y"], label = sex)
-    ax.set_xlabel("PC1")
-    ax.set_ylabel("PC2")
-    ax.legend()
-    ax.title.set_text('by sex')
+ax.set_xlabel("PC1")
+ax.set_ylabel("PC2")
+ax.legend()
+ax.title.set_text('PCA analysis of genomic variation colored by sex')
 plt.savefig("ex3_a.png")
 plt.show()
 
@@ -60,9 +61,10 @@ for superpop in unique_super:
     row = np.where(eigenvec["super_pop"] == superpop)
     subset_data = eigenvec[row] 
     ax.scatter(subset_data["x"], subset_data["y"], label = superpop)
-    ax.set_xlabel("PC1")
-    ax.set_ylabel("PC2")
-    ax.legend()
+ax.set_xlabel("PC1")
+ax.set_ylabel("PC2")
+ax.legend()
+ax.title.set_text('PCA analysis of genomic variation colored by super population')
 plt.savefig("ex3_b.png")
 plt.show()
 
@@ -73,8 +75,11 @@ for pop in unique_pop:
     row = np.where(eigenvec["pop"] == pop)
     subset_data = eigenvec[row] 
     ax.scatter(subset_data["x"], subset_data["y"], label = pop)
-    ax.set_xlabel("PC1")
-    ax.set_ylabel("PC2")
-    ax.legend()
+ax.set_xlabel("PC1")
+ax.set_ylabel("PC2")
+ax.legend(bbox_to_anchor=(1, 1))
+ax.title.set_text('PCA analysis of genomic variation colored by population')
+plt.tight_layout()
 plt.savefig("ex3_c.png")
 plt.show()
+
