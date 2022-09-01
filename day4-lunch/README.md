@@ -176,10 +176,6 @@ Output
 --- Plotting AC for random_snippet.vcf
 
 
-	 
-	 take gene_type of protein_coding processed_pseudogene and lncRNA of Chromosome 21 from gtf file and save into bed file
-	 using bedtools to intersect 
-	 subset into vcf files taking allele counts
 
 
 
