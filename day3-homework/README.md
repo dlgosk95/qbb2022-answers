@@ -45,7 +45,7 @@ fig, ax = plt.subplots()
 unique_gender = np.unique(eigenvec["gender"])
 for sex in unique_gender:
     row = np.where(eigenvec["gender"] == sex)
-    subset_data = eigenvec[row]
+    subset_data = eigenvec[row] # index
     ax.scatter(subset_data["x"], subset_data["y"], label = sex)
 ax.set_xlabel("PC1")
 ax.set_ylabel("PC2")
