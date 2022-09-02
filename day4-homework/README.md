@@ -9,6 +9,8 @@ HOWEVER, for this version of numpy it is not necessary to use numpy.around
 print(numpy.arange(0.55, 1.05, 0.05))
 [0.55 0.6  0.65 0.7  0.75 0.8  0.85 0.9  0.95 1.  ]
 
+But it is a good practice for float because floats often result in rounding errors.
+
 [::-1]
 goes in opposite (decreasing) direction
 [1.   0.95 0.9  0.85 0.8  0.75 0.7  0.65 0.6  0.55]
@@ -56,26 +58,31 @@ def run_experiment(prob_heads, n_toss, n_iters = 100, seed = 389, correct_the_pv
  [0.85 0.84 0.85 0.85 0.84 0.81]
  [0.83 0.88 0.87 0.81 0.83 0.86]]
  
- def plot_heatmap(power_matrix, xticklabels, yticklabels):
-     fig, ax = plt.subplots()
-     # plt.xlabel('Number of Tosses', fontsize = 15) # how to set axis name? not working
-	 # plt.ylabel('Probability of Heads', fontsize = 15) # not working
-     ax.set_xlabel('Number of Tosses') # not working
-     ax.set_ylabel('Probability of Heads') # not working
-     ax.title.set_text('Heatmap of Powers')
-     sns.heatmap(power_matrix, vmin = 0, vmax = 1, xticklabels = xticklabels, yticklabels = yticklabels, ax = ax, cmap = color)
-     #is ax = ax doing something?? I am confused
-     plt.show()
+def plot_heatmap(power_matrix, xticklabels, yticklabels, f_name):
+    # print(f_name)
+    fig, ax = plt.subplots()
+    sns.heatmap(power_matrix, vmin = 0, vmax = 1, xticklabels = xticklabels, yticklabels = yticklabels, ax = ax, cmap = color)
+    #what is ax=ax doing? I can run the same without it.
+    ax.set_xlabel('Number of Tosses')
+    ax.set_ylabel('Probability of Heads')
+    ax.title.set_text('Heatmap of Powers')
+    plt.show()
+    # fig.savefig('test.png') # doesn't work with f_name
+    # return None
 
- tosses = numpy.array([10, 50, 100, 250, 500, 1000])
- probs = numpy.around(numpy.arange(0.55, 1.05, 0.05), decimals=2)[::-1]
- color = sns.color_palette("mako", as_cmap=True)
+tosses = numpy.array([10, 50, 100, 250, 500, 1000])
+probs = numpy.around(numpy.arange(0.55, 1.05, 0.05), decimals=2)[::-1]
+color = sns.color_palette("mako", as_cmap=True)
+
 
 
 power1 = run_experiment(tosses, probs, correct_the_pvalues = True)
 power2 = run_experiment(tosses, probs, correct_the_pvalues = False)
-plot_heatmap(power1, tosses, probs) 
-plot_heatmap(power2, tosses, probs) 
+plot_heatmap(power1, tosses, probs, "correction.png")
+plot_heatmap(power2, tosses, probs, "no_correction.png")
+
+
+
 
 
 Lower the number of tosses, less poweer it has. Closer the probabiility to 0.5, more power.
@@ -88,6 +95,14 @@ This study developed a quantitative method to test a transmission distortion (TD
 
 There are many common aspects between this study and today's homework exercise. First, they are both a heatmap testing the null hypothesis that the ratio of inheritance of two alleles are 50:50. Second, they both use binomial test and simulated dataset. Binomial test is performed when an experiment has two possible outcome with expected probability. They both show heatmaps with and without multiple testing correction(Bonferroni). The trends of heatmaps are also similar.  
 
- The transmission rate axis would correspond to the probability of heads in our exercise.
- The number of sperms would correspond to the number of tosses in our exercise. 
- The number of simulation (n_iter) is 1000 in this figure while our homework exercise had 100 simulations.
+The transmission rate axis would correspond to the probability of heads in our exercise.
+The number of sperms would correspond to the number of tosses in our exercise. 
+The number of simulation (n_iter) is 1000 in this figure while our homework exercise had 100 simulations.
+
+0 power is a lot of false negatives.
+the more data more power
+corrected data required less number of tosses. increases p values to decrease number of false positive
+more false negative because we are controlling decreasing the false positive. 
+tradeoff
+Power heatmap is good at determining what sample size is needed (min) to distinguish signal for a specific affect size of interest (like weak TD vs strong TD).
+0.8 power standard
