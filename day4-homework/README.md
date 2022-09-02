@@ -79,3 +79,15 @@ plot_heatmap(power2, tosses, probs)
 
 
 Lower the number of tosses, less poweer it has. Closer the probabiility to 0.5, more power.
+
+
+Part D
+This study developed a quantitative method to test a transmission distortion (TD) of alleles in humans, in which a selfish allele is transmitted to next generation higher than the expected mandellian ratio. 
+
+(Testing transmission distortion in humans remained as a challenge due to small size of human family and weak statistic power detecting weak TD.)
+
+There are many common aspects between this study and today's homework exercise. First, they are both a heatmap testing the null hypothesis that the ratio of inheritance of two alleles are 50:50. Second, they both use binomial test and simulated dataset. Binomial test is performed when an experiment has two possible outcome with expected probability. They both show heatmaps with and without multiple testing correction(Bonferroni). The trends of heatmaps are also similar.  
+
+ The transmission rate axis would correspond to the probability of heads in our exercise.
+ The number of sperms would correspond to the number of tosses in our exercise. 
+ The number of simulation (n_iter) is 1000 in this figure while our homework exercise had 100 simulations.
