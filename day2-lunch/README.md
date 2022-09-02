@@ -30,3 +30,9 @@ if __name__ == "__main__":
 	for i in bed[0:2]:
 		#print entry i
 		print(i)
+
+
+exon is
+10. block count field[9]
+11. block size
+12. block startss
