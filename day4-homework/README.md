@@ -59,16 +59,14 @@ def run_experiment(prob_heads, n_toss, n_iters = 100, seed = 389, correct_the_pv
  [0.83 0.88 0.87 0.81 0.83 0.86]]
  
 def plot_heatmap(power_matrix, xticklabels, yticklabels, f_name):
-    # print(f_name)
     fig, ax = plt.subplots()
     sns.heatmap(power_matrix, vmin = 0, vmax = 1, xticklabels = xticklabels, yticklabels = yticklabels, ax = ax, cmap = color)
     #what is ax=ax doing? I can run the same without it.
     ax.set_xlabel('Number of Tosses')
     ax.set_ylabel('Probability of Heads')
     ax.title.set_text('Heatmap of Powers')
-    plt.show()
-    # fig.savefig('test.png') # doesn't work with f_name
-    # return None
+    #plt.show()
+    fig.savefig(f_name)
 
 tosses = numpy.array([10, 50, 100, 250, 500, 1000])
 probs = numpy.around(numpy.arange(0.55, 1.05, 0.05), decimals=2)[::-1]
@@ -78,8 +76,8 @@ color = sns.color_palette("mako", as_cmap=True)
 
 power1 = run_experiment(tosses, probs, correct_the_pvalues = True)
 power2 = run_experiment(tosses, probs, correct_the_pvalues = False)
-plot_heatmap(power1, tosses, probs, "correction.png")
-plot_heatmap(power2, tosses, probs, "no_correction.png")
+plot_heatmap(power1, tosses, probs, "correction1.png")
+plot_heatmap(power2, tosses, probs, "no_correction1.png")
 
 
 
