@@ -1,0 +1,3 @@
+# Feedback day2-homework
+
+All of this looks good. Your comments are clear and suggest that you understand what each block of code is doing and why. I noticed that you had a note to dig in later for the type conversion of the info fields. I hope you do. Your labeling script works well and I like that you are using the try statement for checking whether a key is in the dictionary. It looks like you have a good understanding of how to use dictionaries now. Great work. Keep it up!
