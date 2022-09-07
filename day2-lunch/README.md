@@ -35,4 +35,4 @@ if __name__ == "__main__":
 exon is
 10. block count field[9]
 11. block size
-12. block startss
+12. block startsss
