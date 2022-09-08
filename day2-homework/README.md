@@ -1,10 +1,14 @@
- # QBB2022 - Day 2 - Homework Excercises Submission
+# QBB2022 - Day 2 - Homework Excercises Submission
+
+Exercise 1
+Comment on the VCF parser
+
+```
 #!/usr/bin/env python3
-# usage: vcfParser.py
 
 import sys
 
-def parse_vcf(fname): #define function parse_vcf to argument fname
+def parse_vcf(fname):
     vcf = []
     info_description = {}
     info_type = {}
@@ -81,8 +85,8 @@ def parse_vcf(fname): #define function parse_vcf to argument fname
                         info[temp[0]] = None
                     else:
                         name, value = temp # make the 1st of temp as name and 2nd of temp as value. name = temp[0], value = temp[1]
-                        Type = info_type[name] # change value into correct datatype. I want to dig more later!!
-                        info[name] = type_map[Type](value)
+                        Type = info_type[name] # change value into correct datatype. Info type is a dictionary made above ID:Type based on ##INFO. ex. AC : Integer
+                        info[name] = type_map[Type](value) # if type is Integer -> int(value). info is a dictionary with name and value in correct data type
                 fields[7] = info # replace info column with temporary info dictionary
                 if len(fields) > 8: # if column 8 (format) exists 
                     fields[8] = fields[8].split(":") # split format column into a list and overrite
@@ -101,19 +105,16 @@ def parse_vcf(fname): #define function parse_vcf to argument fname
         print(f"There were {malformed} malformed entries", file=sys.stderr)
     return vcf # close function
 
-if __name__ == "__main__": # making this scrip executable or be able to imported
+if __name__ == "__main__": # making this scrip executable
     fname = sys.argv[1] # user input filename
     vcf = parse_vcf(fname) # run function on this file
     for i in range(10): # print 10 column 
         print(vcf[i])
-		
-		git
-		
-		
-		
-		
-		
+```
 
+Exercise 2
+
+```
 # goal is to replace ID from db to random snippet if it has correct position
 # make dictionaries position:id from dbSNP
 # compare with random snippet and replace
@@ -122,11 +123,10 @@ if __name__ == "__main__": # making this scrip executable or be able to imported
 first_file = "/Users/cmdb/qbb2022-answers/day2-homework/random_snippet.vcf"
 second_file = "/Users/cmdb/qbb2022-answers/day2-homework.dbSNP_snippet.vcf"
 
-
-
 from vcfParser import *
 #import vcfParser and everytime call function vcfParser.parse_vcf
 #from vcfParser import parse_vcf
+
 rand = parse_vcf('random_snippet.vcf')
 fs = open('dbSNP_snippet.vcf', 'r')
 counter = 0
@@ -150,10 +150,7 @@ for i, line in enumerate(fs):
 #       rand[1][2] = identification
 #   else:
 #       continue
-
 #very inefficient because it has to go through all length of dictionary(n) as well as vcf (m) so it ran n*m 
-
-
 
 for i in range(1,len(rand)):
     record = rand[i]
@@ -169,3 +166,4 @@ for i in range(1,len(rand)):
 print (rand, counter)
 
 #counter is 78
+```
