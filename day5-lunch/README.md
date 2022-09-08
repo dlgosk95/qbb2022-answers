@@ -99,7 +99,6 @@ Note both coefficients are larger than mother's.
 
 
 
-
 ```
 (base) [~/qbb2022-answers/day5-lunch $]grep -E 'father|mother' aau1043_dnm.csv | cut -d, -f 5-6 | sort -n | uniq -c > father_mother.txt
 
