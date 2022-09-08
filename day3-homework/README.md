@@ -1,9 +1,12 @@
 # QBB2022 - Day 3 - Homework Exercises Submission
 
 exercise 1
+```
 (base) [~/qbb2022-answers/day3-homework $]plink --vcf ALL.chr21.shapeit2_integrated_v1a.GRCh38.20181129.phased.vcf.gz --pca 3
+```
 
 excercise 2
+```
 #!/usr/bin/env python
 
 import sys
@@ -27,11 +30,17 @@ ax.set_ylabel("PC3")
 plt.savefig("ex2_b.png")
 
 plt.show()
+```
 
+```
+(base) [~/qbb2022-answers/day3-homework $]python graph.py
+```
+
+Do you notice any structure among the points? What do you think this structure represents?
 There are three clusters, which may indicate genetic similarity within clusters.
 
 exercise 3
-
+```
 #!/usr/bin/env python
 
 import sys
@@ -82,4 +91,8 @@ ax.title.set_text('PCA analysis of genomic variation colored by population')
 plt.tight_layout()
 plt.savefig("ex3_c.png")
 plt.show()
+```
 
+```
+(base) [~/qbb2022-answers/day3-homework $]python graph2.py 
+```
