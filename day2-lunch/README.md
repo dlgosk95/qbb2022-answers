@@ -1,4 +1,5 @@
 Exercise 1
+This was made on Wednesday TA office hour together. We had issues running it but solved on Thursday TA office hour. 
 ```
 #!/usr/bin/env python3
 
@@ -70,7 +71,7 @@ def parse_bed(fname):
             # replace 10th column with its integer version
             fields[9] = blockCount
         except:
-            # Issue : it's not updating i? Solved - typo and making blockCount integer
+            # Issue : it's not updating i? Solved - by changing several i to k l m. Also fixed typo and made blockCount integer
             print(f"Line {i} appears malformed", file=sys.stderr)
             
         try:
