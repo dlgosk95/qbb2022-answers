@@ -13,8 +13,8 @@ second_file = "/Users/cmdb/qbb2022-answers/day2-homework.dbSNP_snippet.vcf"
 from vcfParser import *
 #import vcfParser and everytime call function vcfParser.parse_vcf
 #from vcfParser import parse_vcf
-rand = parse_vcf('random_snippet.vcf') # read in random_snippet.vcf
-fs = open('dbSNP_snippet.vcf', 'r')
+rand = parse_vcf('random_snippet.vcf') # read in parsed random_snippet.vcf
+fs = open('dbSNP_snippet.vcf', 'r') # open file dbSNPs
 counter = 0
 
 snp ={} # smake empty dictionary
