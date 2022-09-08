@@ -1,5 +1,7 @@
 # qbb 2022 day 1 homework
 
+Exercise 1
+```
 #!/bin/bash
 #USAGE: bash exercise1.sh input_VCF
 
@@ -10,8 +12,10 @@ do
   echo "Considering " $nuc 
   awk -v nuc="$nuc" '/^#/{next} {if ($4 == nuc) {print $5}}' $vcffile | sort | uniq -c
 done
+```
 
-
+```
+(base) [~/qbb2022-answers/day1-homework $]bash exercise1.sh ~/data/vcf_files/random_snippet.vcf
 Considering  A
  354 C
 1315 G
@@ -28,9 +32,12 @@ Considering  T
  358 A
 1317 C
  386 G
- 
- Yes it answers if Reference is A (or c or g or T) how many there are alternative SNPs Transversion
- 
+```
+Do the results make sense given what you know about the biology of these bases?
+Yes it answers if Reference is A (or c or g or T) how many there are each alternative SNPs.
+
+Exercise 2
+
  No promoter parts are not clear. I assume promoters to be including and upstream of TSS. 
  
 
