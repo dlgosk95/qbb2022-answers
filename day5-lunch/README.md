@@ -1,3 +1,6 @@
+Exercise 1
+
+```
 (base) [~/qbb2022-answers/day5-lunch $]grep "father" $6 aau1043_dnm.csv| cut -d, -f 5-6 | sort -n | uniq -c | less -S > father_proband_count.sh
 (base) [~/qbb2022-answers/day5-lunch $]grep "mother" $6 aau1043_dnm.csv| cut -d, -f 5-6 | sort -n | uniq -c | less -S > mother_proband_count.sh
 
@@ -10,16 +13,13 @@
 
 (base) [~/qbb2022-answers/day5-lunch $]grep -v 'Proband_id' aau1043_parental_age.csv > no_head_age.csv
 
-(base) [~/qbb2022-answers/day5-lunch $]join -t, -1 1 -2 1 joined_modified.csv no_head_age.csv > proband_fm_count_age.csvq
+(base) [~/qbb2022-answers/day5-lunch $]join -t, -1 1 -2 1 joined_modified.csv no_head_age.csv > proband_fm_count_age.csv
+```
 
+Exercise 2 
+The python script is at the bottom.
 
-
-
-
-
-
-
-
+```
 Ttest_indResult(statistic=-34.727245819690495, pvalue=3.6551794700990466e-161)
 
                             OLS Regression Results                            
@@ -50,11 +50,11 @@ Notes:
 
 For Mom:
 The result is significant because the pvalue is extremely small (pvalue=3.6551794700990466e-161).
-c
 
 
 
 
+```
 Ttest_indResult(statistic=26.675255607555535, pvalue=2.765837479277908e-112)
 (base) [~/qbb2022-answers/day5-lunch $]./linear_regression.py 
                             OLS Regression Results                            
@@ -82,7 +82,7 @@ Kurtosis:                       3.483   Cond. No.                         127.
 
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-
+```
 
 For Dad:
 The result is significant because the pvalue is extremely small (pvalue=2.765837479277908e-112).
@@ -100,7 +100,7 @@ Note both coefficients are larger than mother's.
 
 
 
-
+```
 (base) [~/qbb2022-answers/day5-lunch $]grep -E 'father|mother' aau1043_dnm.csv | cut -d, -f 5-6 | sort -n | uniq -c > father_mother.txt
 
 (base) [~/qbb2022-answers/day5-lunch $]tr "," " " < father_mother.txt > father_mother_modified.txt
@@ -138,6 +138,7 @@ Kurtosis:                       5.910   Cond. No.                         2.62
 
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+```
 
 P-value is extremely small, so
 the number of maternally inherited de novo mutations per proband is significantly different than the number of paternally inherited de novo mutations per proband.
@@ -168,12 +169,7 @@ The decimal point is dropped because dtype=none set age automatically as integer
 
 
 
-
-
-
-
-
-
+```
 #!/usr/bin/env python
 
 import numpy as np
@@ -243,3 +239,4 @@ new_data = df[0]
 new_data.fill(0)
 new_data['father_age'] = 50.5
 print(results_dad.predict(new_data))
+```
