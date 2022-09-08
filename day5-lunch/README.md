@@ -47,6 +47,7 @@ Kurtosis:                       4.310   Cond. No.                         121.
 
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+```
 
 For Mom:
 The result is significant because the pvalue is extremely small (pvalue=3.6551794700990466e-161).
