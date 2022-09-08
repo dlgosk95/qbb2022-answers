@@ -1,3 +1,5 @@
+Part A 
+
 numpy.arange(0.55, 1.05, 0.05)
 means list of numbers starting from 0.55 increased by 0.05
 so there would be 10 values in the list
@@ -15,6 +17,10 @@ But it is a good practice for float because floats often result in rounding erro
 goes in opposite (decreasing) direction
 [1.   0.95 0.9  0.85 0.8  0.75 0.7  0.65 0.6  0.55]
 
+
+Part B 
+
+```
 def run_experiment(prob_heads, n_toss, n_iters = 100, seed = 389, correct_the_pvalues = False):
     '''
     Input: prob_heads, a float, the probability of a simulated coin toss returning heads
@@ -44,8 +50,9 @@ def run_experiment(prob_heads, n_toss, n_iters = 100, seed = 389, correct_the_pv
             power_matrix[i,j] = power
     return(power_matrix)
 
-
 # or we can have power as function and make another function including toss and prob
+```
+If I print it:
 
 [[0.85 0.75 0.83 0.77 0.86 0.85]
  [0.87 0.83 0.85 0.86 0.87 0.83]
@@ -57,7 +64,11 @@ def run_experiment(prob_heads, n_toss, n_iters = 100, seed = 389, correct_the_pv
  [0.86 0.83 0.78 0.88 0.86 0.81]
  [0.85 0.84 0.85 0.85 0.84 0.81]
  [0.83 0.88 0.87 0.81 0.83 0.86]]
- 
+
+
+Part C 
+
+```
 def plot_heatmap(power_matrix, xticklabels, yticklabels, f_name):
     fig, ax = plt.subplots()
     sns.heatmap(power_matrix, vmin = 0, vmax = 1, xticklabels = xticklabels, yticklabels = yticklabels, ax = ax, cmap = color)
@@ -78,15 +89,14 @@ power1 = run_experiment(tosses, probs, correct_the_pvalues = True)
 power2 = run_experiment(tosses, probs, correct_the_pvalues = False)
 plot_heatmap(power1, tosses, probs, "correction1.png")
 plot_heatmap(power2, tosses, probs, "no_correction1.png")
+```
+
+Trend : 
+Lower the number of tosses, less power it has. Closer the probabiility to 0.5, less power.
 
 
+Part D 
 
-
-
-Lower the number of tosses, less poweer it has. Closer the probabiility to 0.5, more power.
-
-
-Part D
 This study developed a quantitative method to test a transmission distortion (TD) of alleles in humans, in which a selfish allele is transmitted to next generation higher than the expected mandellian ratio. 
 
 (Testing transmission distortion in humans remained as a challenge due to small size of human family and weak statistic power detecting weak TD.)
