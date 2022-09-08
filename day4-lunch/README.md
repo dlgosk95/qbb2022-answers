@@ -173,6 +173,7 @@ awk
 		- Saves as png files
 
 Output
+```
 *** Creating .bed files for features of interest
 --- Creating protein_coding.chr21.bed
 --- Creating processed_pseudogene.chr21.bed
@@ -193,5 +194,5 @@ Output
 --- Plotting AC for processed_pseudogene.chr21.bed.vcf
 --- Plotting AC for protein_coding.chr21.bed.vcf
 --- Plotting AC for random_snippet.vcf
-
+```
 
