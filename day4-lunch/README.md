@@ -96,6 +96,7 @@ Output – example output
      bash do_all.sh <file1.vcf> <file2.gtf>
 
  Dependencies
+```
 bedtools                  2.30.0               h0e31d98_3    bioconda
 blas                      1.0                         mkl    anaconda
 brotli                    1.0.9                hb1e8313_2    anaconda
@@ -146,6 +147,7 @@ wheel                     0.37.1             pyhd3eb1b0_0    anaconda
 xz                        5.2.5                hca72f7f_1    anaconda
 zlib                      1.2.12               h4dc903c_2    anaconda
 zstd                      1.5.2                hcb37349_0    anaconda
+```
 
 Specifically, we have installed:
 matplotlib
