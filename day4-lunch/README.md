@@ -1,6 +1,6 @@
-exercise 1
+Exercise 1
 
-
+```
 *** Subsetting .vcf for each feature
 --- Subsetting exons.chr21.bed.vcf
     + Covering 1107407 bp
@@ -8,22 +8,28 @@ exercise 1
     + Covering 956640 bp
 --- Subsetting protein_coding.chr21.bed.vcf
     + Covering 13780687 bp
+```
 
 follow the instruction in readme
 it will make 4 plots 
+
 processed_pseudogene.chr21.bed.vcf.png
 random_snippet.vcf.png
 protein_coding.chr21.bed.vcf.png
 exons.chr21.bed.vcf.png	
 
 first open both files and check if they are the same:
+```
 (day4-lunch) [~/cmdb-plot-vcfs $]open processed_pseudogene.chr21.bed.vcf.png
 (day4-lunch) [~/cmdb-plot-vcfs $]open ./cache/processed_pseudogene.chr21.bed.vcf.png 
+```
 
+Or use this command #1
 #1) cmp: This command is used to compare two files character by character.
 #2) comm: This command is used to compare two sorted files.
 #3) diff: This command is used to compare two files line by line.
 
+```
 (day4-lunch) [~/cmdb-plot-vcfs $]cmp processed_pseudogene.chr21.bed.vcf.png ./cache/processed_pseudogene.chr21.bed.vcf.png 
 processed_pseudogene.chr21.bed.vcf.png ./cache/processed_pseudogene.chr21.bed.vcf.png differ: char 73, line 3
 
@@ -31,10 +37,15 @@ processed_pseudogene.chr21.bed.vcf.png ./cache/processed_pseudogene.chr21.bed.vc
 "processed_pseudogene.chr21.bed.vcf.png" may be a binary file.  See it anyway? 
 (day4-lunch) [~/cmdb-plot-vcfs $]less -S ./cache/processed_pseudogene.chr21.bed.vcf.png 
 "./cache/processed_pseudogene.chr21.bed.vcf.png" may be a binary file.  See it anyway? 
+```
+
 The only difference was on line 3 matplotlib version was 3.5.1 for me while in cache the matplotlib version was 3.5.3
 So the same plots.
 
+```
 (day4-lunch) [~/cmdb-plot-vcfs $]less -S gencode.v41.annotation.gtf 
+```
+
 Other types of genetypes are: 
 transcribed_unprocessed_pseudogene
 unprocessed_pseudogene
@@ -45,16 +56,18 @@ protein_coding
 There must be more but I need to parse (bc there are too many info in one column seperated by tabs) and sort and unique-c to find all types of genetypes.
 I find miRNA lncRNA and snRNA interesting because they are RNA with specialized functions.
 
-exercise 2
+Exercise 2
 
 In plot_vcf_ac.py, after ax.hist( ac, density=True ), add
+
+```
 plt.yscale('log')
 ax.title.set_text('Log scale Frequency of Allele Count')
 ax.set_ylabel("Log 10 Number of Occurences")
 ax.set_xlabel("Allele Count")
+```
 
 Save and run do_all.sh
-
 
 
 In subset_regions.sh, added lncRNA
@@ -62,7 +75,12 @@ for TYPE in protein_coding processed_pseudogene lncRNA
 
 Save and run do_all.sh
 
-exercise 3
+
+Trend : 
+Generally, higher Allele count has decreased Number of Occurences
+
+
+Exercise 3
 
 Synopsis – <50 words
 Usage – syntax including input file requirements
@@ -73,12 +91,11 @@ Output – example output
  SYNOPSIS
      bxlab/cmdb-plot-vcfs -- 
 	 Plots histogram of log10 scaled allele count from vcf file, using the specific gene types extracted from gtf file
-	 
 
  USAGE
      bash do_all.sh <file1.vcf> <file2.gtf>
 
-Dependencies
+ Dependencies
 bedtools                  2.30.0               h0e31d98_3    bioconda
 blas                      1.0                         mkl    anaconda
 brotli                    1.0.9                hb1e8313_2    anaconda
@@ -174,17 +191,5 @@ Output
 --- Plotting AC for processed_pseudogene.chr21.bed.vcf
 --- Plotting AC for protein_coding.chr21.bed.vcf
 --- Plotting AC for random_snippet.vcf
-
-
-
-
-
-
-
-
-
-
-
-
 
 
