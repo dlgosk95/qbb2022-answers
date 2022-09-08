@@ -21,6 +21,10 @@ goes in opposite (decreasing) direction
 Part B 
 
 ```
+(base) [~/qbb2022-answers/day4-homework $]python binomial_power_interactive_lecture.py 
+```
+
+```
 def run_experiment(prob_heads, n_toss, n_iters = 100, seed = 389, correct_the_pvalues = False):
     '''
     Input: prob_heads, a float, the probability of a simulated coin toss returning heads
@@ -67,6 +71,12 @@ If I print it:
 
 
 Part C 
+
+```
+(base) [~/qbb2022-answers/day4-homework $]python binomial_power_interactive_lecture.py 
+correction1.png
+no_correction1.png
+```
 
 ```
 def plot_heatmap(power_matrix, xticklabels, yticklabels, f_name):
