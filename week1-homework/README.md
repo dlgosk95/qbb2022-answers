@@ -1,16 +1,19 @@
 Question 1. Coverage simulator
 
 Question 1.1. How many 100bp reads are needed to sequence a 1Mbp genome to 5x coverage? How many are needed for 15x coverage?
+
 1000000*5/100=50000
+
 1000000*15/100=150000
 
 
 Question 1.2. Write a program (in Python) to simulate sequencing 5x coverage of a 1Mbp genome with 100bp reads. The output of this simulation should be an array of length 1 million, where each element in the array is the coverage at that base (i.e. a count of the number of reads that overlapped that base’s position). You do not actually need to consider the sequence of the genome or the strand of the reads. Using this array, plot a histogram of the coverage. Then, overlay the histogram with a Poisson distribution with lambda=5.
 
 See the script question1_2.py
+
 See the image histogram.png and with_poisson2.png
 
-I have some questions written within the script, particularly about bin
+I have some questions written within the script, particularly about the bins
 
 
 Question 1.3. Using your output array of coverages from Q1.2, how much of the genome (e.g., how many base pairs) has not been sequenced (has 0x coverage)? How well does this match Poisson expectations?
@@ -40,6 +43,7 @@ It matches pretty well. off by about 255.
 
 
 Question 1.4. Now repeat the analysis with 15x coverage: 
+
 simulate the appropriate number of reads and compute coverage,
 make a histogram, 
 overlay a Poisson distribution with lambda=15,
@@ -47,6 +51,7 @@ compute the number of bases with 0x coverage, and
 evaluate how well it matches the Poisson expectation.
 
 See the script question1_4.py
+
 See the image histogram2.png and with_poisson2.png
 
 Question about with_poisson2.png because poisson is much lower than histogram. Should I multiply by 15?
