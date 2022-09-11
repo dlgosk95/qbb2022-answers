@@ -263,6 +263,7 @@ Question 4.1. What is the position of the insertion in your assembly? Provide th
 
 
 Question 4.2. How long is the novel insertion? [Hint: try show-coords]
+
 712 bp
 
 
