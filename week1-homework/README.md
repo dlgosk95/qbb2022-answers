@@ -9,7 +9,8 @@ Question 1.2. Write a program (in Python) to simulate sequencing 5x coverage of 
 
 See the script question1_2.py
 See the image histogram.png and with_poisson2.png
-I have some questions written within the script
+
+I have some questions written within the script, particularly about bin
 
 
 Question 1.3. Using your output array of coverages from Q1.2, how much of the genome (e.g., how many base pairs) has not been sequenced (has 0x coverage)? How well does this match Poisson expectations?
@@ -48,6 +49,8 @@ evaluate how well it matches the Poisson expectation.
 See the script question1_4.py
 See the image histogram2.png and with_poisson2.png
 
+Question about with_poisson2.png because poisson is much lower than histogram. Should I multiply by 15?
+
 ```
 array = np.array(x) # make list into array
 zero = array[np.where(array == 0)]
@@ -68,6 +71,7 @@ Question 2. De novo assembly
 Question 2.1. How many contigs were produced? [Hint: try grep -c '>' contigs.fasta]
 (base) [~/qbb2022-answers/week1-homework/asm/asm $]grep -c '>' contigs.fasta
 4
+
 
 Question 2.2. What is the total length of the contigs? [Hint: try samtools faidx, plus a short script if necessary]
 
@@ -98,6 +102,7 @@ The total length of the contigs is 234467bp.
 # What is END??
 # What is offset??
 
+
 Question 2.3. What is the size of your largest contig? [Hint: check samtools faidx plus sort -n]
 
 (base) [~/qbb2022-answers/week1-homework/asm/asm $]sort -k2 -n contigs.fasta.fai
@@ -108,11 +113,12 @@ NODE_1_length_105830_cov_20.649193	105830	36	60	61
 
 Node  1 is the largest contig with a legth of 105830bp.
 
+
 Question 2.4. What is the contig N50 size? [Hint: Write a short script if necessary]
 
 You have the longest contig first, then the second longest, and so on with the shortest ones in the end. Then you start adding up the lengths of all contigs from the beginning, so you take the longest contig + the second longest + the third longest and so on — all the way until you’ve reached the number that is making up 50% of your total assembly length. That length of the contig that you stopped counting at, this will be your N50 number.
 
-Total is 234467. >50% is 117233.5.
+Total is 234467. >50% is 117234.
 (base) [~/qbb2022-answers/week1-homework/asm/asm $]awk '{SUM+=$2}{print SUM}' contigs.fasta.fai
 105830
 153690
@@ -161,28 +167,12 @@ TotalLength                   233755               233755
 AvgLength                   46751.00             46751.00
 AvgIdentity                   100.00               100.00
 
-I am not sure what the question is asking. Average Identify? 100?
+I am not sure what the question is asking. Average Identify? You mean Identity? 100?
+
 
 Question 3.2. What is the length of the longest alignment [Hint: try nucmer and show-coords]
 
-```
 (base) [~/qbb2022-answers/week1-homework/asm/asm $]nucmer ref.fa contigs.fasta
-1: PREPARING DATA
-2,3: RUNNING mummer AND CREATING CLUSTERS
-# reading input file "out.ntref" of length 233807
-# construct suffix tree for sequence of length 233807
-# (maximum reference length is 2305843009213693948)
-# (maximum query length is 18446744073709551615)
-# process 2338 characters per dot
-#....................................................................................................
-# CONSTRUCTIONTIME /Users/cmdb/miniconda3/opt/mummer-3.23/mummer out.ntref 0.02
-# reading input file "/Users/cmdb/qbb2022-answers/week1-homework/asm/asm/contigs.fasta" of length 234470
-# matching query-file "/Users/cmdb/qbb2022-answers/week1-homework/asm/asm/contigs.fasta"
-# against subject-file "out.ntref"
-# COMPLETETIME /Users/cmdb/miniconda3/opt/mummer-3.23/mummer out.ntref 0.06
-# SPACE /Users/cmdb/miniconda3/opt/mummer-3.23/mummer out.ntref 0.45
-4: FINISHING DATA
-```
 
 (base) [~/qbb2022-answers/week1-homework/asm/asm $]less -S out.delta 
 /Users/cmdb/qbb2022-answers/week1-homework/asm/asm/ref.fa /Users/cmdb/qbb2022-answers/week1-homework/asm/asm>
@@ -218,7 +208,10 @@ NUCMER
 
 The length of the longest alignment is 105830.
 
+
 Question 3.3. How many insertions and deletions are in the assembly? [Hint: try dnadiff]
+
+(base) [~/qbb2022-answers/week1-homework/asm/asm $]less -S out.report 
 
 Insertions                         5                    1
 InsertionSum                      51                  712
@@ -237,8 +230,10 @@ Question 4. Decoding the insertion
 Question 4.1. What is the position of the insertion in your assembly? Provide the corresponding position in the reference. [Hint: try show-coords]
 26788 to 27499 in NODE_3_length_41351_cov_20.528098
 
+
 Question 4.2. How long is the novel insertion? [Hint: try show-coords]
 712 bp
+
 
 Question 4.3. What is the DNA sequence of the encoded message? [Hint: try samtools faidx to extract the insertion]
 
