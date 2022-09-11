@@ -91,12 +91,14 @@ NODE_3_length_41351_cov_20.528098       41351   156358  60      61
 NODE_4_length_39426_cov_20.336388       39426   198434  60      61
 ```
 
+```
 NAME	Name of this reference sequence
 LENGTH	Total length of this reference sequence, in bases
 OFFSET	Offset in the FASTA/FASTQ file of this sequence's first base
 LINEBASES	The number of bases on each line
 LINEWIDTH	The number of bytes in each line, including the newline
 QUALOFFSET	Offset of sequence's first quality within the FASTQ file
+```
 
 ```
 (base) [~/qbb2022-answers/week1-homework/asm/asm $]awk '{SUM+=$2}{print SUM}' contigs.fasta.fai
@@ -256,6 +258,7 @@ UnalignedBases             51(0.02%)           712(0.30%)
 Question 4. Decoding the insertion
 
 Question 4.1. What is the position of the insertion in your assembly? Provide the corresponding position in the reference. [Hint: try show-coords]
+
 26788 to 27499 in NODE_3_length_41351_cov_20.528098
 
 
