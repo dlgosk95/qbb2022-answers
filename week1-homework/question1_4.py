@@ -15,7 +15,7 @@ for i in range(len(place)): # 0 to 49999
 # print (x)
 
 fig1, ax1 = plt.subplots()
-ax1.hist(x, bins = 17) # what is the best bin number??
+ax1.hist(x, bins = np.arange(0, max(x) + 1, 1)) # what is the best bin number??
 ax1.set_xticks(np.arange(0, 31, 1))
 plt.xlim(0, 30)
 # what to label x axis?? k? Number of incidence? Number of events?
@@ -33,7 +33,7 @@ k = np.arange(0, 31, 1)
 # probability of observing each coverage * total = frequency count ??
 y = poisson.pmf(k, mu=15)*1000000
 # plotting the graph
-ax2.hist(x, bins = 17)
+ax2.hist(x, bins = np.arange(0, max(x) + 1, 1))
 ax2.plot(k, y)
 ax2.scatter(k, y, color = 'red')
 
