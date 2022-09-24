@@ -112,8 +112,8 @@ QUALOFFSET	Offset of sequence's first quality within the FASTQ file
 
 The total length of the contigs is 234467bp.
 
-# What is END??
-# What is offset??
+# What is END?? awk is working line by line. End means finish sum before printing.
+# What is offset?? 
 
 
 Question 2.3. What is the size of your largest contig? [Hint: check samtools faidx plus sort -n]

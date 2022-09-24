@@ -33,7 +33,11 @@ k = np.arange(0, 31, 1)
 # probability of observing each coverage * total = frequency count ??
 y = poisson.pmf(k, mu=15)*1000000
 # plotting the graph
+<<<<<<< Updated upstream
 ax2.hist(x, bins = np.arange(0, max(x) + 1, 1))
+=======
+ax2.hist(x, bins = range(min(x), max(x) + 1, 1))
+>>>>>>> Stashed changes
 ax2.plot(k, y)
 ax2.scatter(k, y, color = 'red')
 

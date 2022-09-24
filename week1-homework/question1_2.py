@@ -15,15 +15,21 @@ for i in range(len(place)): # 0 to 49999
 # print (x)
 
 fig1, ax1 = plt.subplots()
+<<<<<<< Updated upstream
 ax1.hist(x, bins = np.arange(0, max(x) + 1, 1)) 
 # bins=np.arange(min(data), max(data) + binwidth, binwidth
+=======
+ax1.hist(x, bins = range(min(x), max(x) + 1, 1)) # ideal bin number
+>>>>>>> Stashed changes
 ax1.set_xticks(np.arange(0, 21, 1))
 plt.xlim(0, 20)
-# what to label x axis?? k? Number of incidence? Number of events?
-plt.savefig("histogram.png") # savefig must go before show because show will free all memory
-plt.show()
-plt.close() # why do we use close?? to save memory?
+ax1.set_xlabel("Coverage") # a count of number of reads that overlaps the base's position. number of time reads overlap that position. k
+ax1.set_ylabel("Count")
 
+
+plt.show() # to show and then reset plt
+fig1.savefig("histogram.png") # plt.savefig must go before show because show will free all memory. plt is whatever the matplot is working with most recently.
+plt.close(fig1) # to clear memory?
 
 fig2, ax2 = plt.subplots()
 #PMF f(k;u)=P(X=k)= (e^-u *u^k)/ k!
