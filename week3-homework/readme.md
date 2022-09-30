@@ -38,8 +38,40 @@ snpeff ann --help | less -S
 
 (base) [~/qbb2022-answers/week3-homework $]snpeff ann R64-1-1.99 sac_decompose.vcf > sac_predict.vcf
 
+
+
+
 The read depth distribution of variant genotypes (histogram)
 FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read Depth">
+
+The quality distribution of variant genotypes (histogram)
+FORMAT=<ID=GQ,Number=1,Type=Float,Description="Genotype Quality, the Phred-scaled marginal (or unconditional) probability of the called genotype">
+
+The allele frequency spectrum of your identified variants (histogram)
+INFO=<ID=AF,Number=A,Type=Float,Description="Estimated allele frequency in the range (0,1]">
+
+A summary of the predicted effect(s) of each variant as determined by snpEff (barplot)
+INFO=<ID=ANN,Number=.,Type=String,Description="Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript>
+INFO=<ID=LOF,Number=.,Type=String,Description="Predicted loss of function effects for this variant. Format: 'Gene_Name | Gene_ID | Number_of_transcripts_in_gene | Percent_of_>
+INFO=<ID=NMD,Number=.,Type=String,Description="Predicted nonsense mediated decay effects for this variant. Format: 'Gene_Name | Gene_ID | Number_of_transcripts_in_gene | Perc>
+
+
+
+
+
+
+(base) [~/qbb2022-answers/week3-homework $]head -n 1000 sac_qual.vcf > 1000_filtered.vcf
+(base) [~/qbb2022-answers/week3-homework $]wc 1000_filtered.vcf 
+    1000   17617  630156 1000_filtered.vcf
+(base) [~/qbb2022-answers/week3-homework $]wc -l 1000_filtered.vcf 
+    1000 1000_filtered.vcf
+(base) [~/qbb2022-answers/week3-homework $]head -n 1000 sac_predict.vcf > 1000_predicted.vcf
+(base) [~/qbb2022-answers/week3-homework $]wc -l 1000_predicted.vcf 
+    1000 1000_predicted.vcf
+(base) [~/qbb2022-answers/week3-homework $]head -n 1000 sac_decompose.vcf > 1000_decomposed.vcf
+(base) [~/qbb2022-answers/week3-homework $]wc -l 1000_decomposed.vcf 
+    1000 1000_decomposed.vcf
+
 
 
 
