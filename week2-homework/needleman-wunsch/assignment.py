@@ -100,13 +100,13 @@ while (k!=0 or l!=0):
         seq2_align = sequence2[l-1] + seq2_align
         k-=1
         l-=1
-    if current_dir == 'h':
+    elif current_dir == 'h':
         seq1_align = '-' + seq1_align
         seq2_align = sequence2[l-1] + seq2_align
         l-=1
         # print(sequence2[l-1])
         # print(current_dir)
-    if current_dir == 'v':
+    elif current_dir == 'v':
         seq2_align = '-' + seq2_align
         seq1_align = sequence1[k-1] + seq1_align
         k-=1
