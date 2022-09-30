@@ -1,0 +1,6 @@
+The number of gaps in sequence1
+46
+The number of gaps in sequence2
+78
+The score of the alignments
+266300.0
