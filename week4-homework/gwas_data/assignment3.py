@@ -16,6 +16,8 @@ for i in range(1,len(freq)):
 
 fig, ax = plt.subplots()
 ax.hist(allele_freq)
+ax.set_xlabel("Allele Frequency")
+ax.set_ylabel("Count of Allele Frequency")
 plt.savefig("allele_freq.png")
 plt.xticks(rotation=30, ha='right') 
 plt.show()

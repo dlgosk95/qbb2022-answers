@@ -9,12 +9,14 @@ plink --vcf genotypes.vcf --pca 10
 pca eigenval as covariates
 --covar c.txt
 
-controlling for that relatednes
+controlling for that relatedness
 twice
 
 plink --vcf genotypes.vcf --linear --pheno CB1908_IC50.txt --covar plink.eigenvec --allow-no-sex --out output_CB1908
 plink --vcf genotypes.vcf --linear --pheno GS451_IC50.txt --covar plink.eigenvec --allow-no-sex --out output_GS451
 
+Manhattan plot
+hardcoding
 OR
 pip install qmplot
 
@@ -26,5 +28,10 @@ Band: 12q13.13
 Genomic Size: 1
 Summary: A>A/G (chimp allele displayed first, then '>', then human alleles)
 
+This SNP is residing inside DIP2B gene. The nearby genes are LARP4, AL833333, DKFZp686M1483.
+
 DIP2B
-DIP2 disco-interacting protein 2 homolog B (Drosophila) is a protein that in humans is encoded by the DIP2B gene.[5] A member of the disco-interacting protein homolog 2 protein family, it contains a binding site for the transcriptional regulator DNA methyltransferase 1 associated protein 1, as well as AMP-binding sites. The presence of these sites suggests that DIP2B may participate in DNA methylation. This gene is located near a folate-sensitive fragile site.[5][6]
+DIP2 disco-interacting protein 2 homolog B (Drosophila) is a protein that in humans is encoded by the DIP2B gene. A member of the disco-interacting protein homolog 2 protein family, it contains a binding site for the transcriptional regulator DNA methyltransferase 1 associated protein 1, as well as AMP-binding sites. The presence of these sites suggests that DIP2B may participate in DNA methylation. This gene is located near a folate-sensitive fragile site. (Wikipedia)
+
+How could you figure this out if you didn't know?
+Find a reference genome that has no alternative allele shown in our variant. 
