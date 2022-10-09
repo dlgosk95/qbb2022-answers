@@ -18,8 +18,10 @@ for i, trace in enumerate(traces):
     ax[i].plot(x,y)
     ax[i].fill_between(x,y)
     ax[i].set_ylabel(trace, fontsize = 9)
-plt.savefig('assignment5.png')
+
 plt.subplots_adjust(hspace = 1)
 plt.xlabel("Location along Chromosome 17")
 fig.tight_layout(pad=1.0)
+plt.savefig('assignment5.png')
 plt.show()
+plt.close()
