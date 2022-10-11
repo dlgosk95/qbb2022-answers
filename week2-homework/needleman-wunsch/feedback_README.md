@@ -7,3 +7,7 @@ When you're doing traceback you should be using `elif` statements instead of `if
 We also want you to print out the alignment statistics: number of gaps in each sequence, and the alignment score. Also, don't forget to upload the DNA and AA alignments in separate files (-2)
 
 7.75/10
+
+**REGRADE**:
+Awesome work. This looks really good :)
+10/10
