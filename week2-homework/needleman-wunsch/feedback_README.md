@@ -9,5 +9,7 @@ We also want you to print out the alignment statistics: number of gaps in each s
 7.75/10
 
 **REGRADE**:
+
 Awesome work. This looks really good :)
+
 10/10
