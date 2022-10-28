@@ -57,6 +57,7 @@ for i in range(len(data_40kb_filtered)):
     data_40kb_filtered[i][0] = data_40kb_filtered[i][0] - 54878
     data_40kb_filtered[i][1] = data_40kb_filtered[i][1] - 54878
 # print(data1_filtered)
+# print (len(data_40kb_filtered))
 
 ## Convert the sparse data into a square matrix (note that the sparse data only contains one entry per interaction with the lower-numbered bin in the first column). By converting the sparse matrix it into a complete matrix for plotting, you have two entries per interaction. For one line of the sparse data format, the data relates to the full matrix as follows:
 
@@ -64,7 +65,7 @@ empty40kb = numpy.zeros((54951+1-54878,54951+1-54878))
 
 empty40kb[data_40kb_filtered['F1'], data_40kb_filtered['F2']] = data_40kb_filtered['score']
 empty40kb[data_40kb_filtered['F2'], data_40kb_filtered['F1']] = data_40kb_filtered['score']
-# print(empty40kb)
+print(empty40kb)
 # print(54951+1-54878) ## 74
 
 insulation = numpy.zeros((69,))
@@ -82,9 +83,10 @@ ax[0].axis('off')
 plt.margins(x=0)
 # ax[1].set_xlim(10400000, 13400000)
 plt.subplots_adjust(left=0.15, bottom=0.1, right=1.0, top=1.0, wspace=0.4, hspace=0.0)
-ax[0].imshow(empty40kb,cmap = "magma_r", vmax = 4)
+ax[0].imshow(empty40kb,cmap = "magma_r", vmax = 7)
 ax[1].plot(x, y)
-
+ax[1].set_xlabel("Bin Number")
+ax[1].set_ylabel("Insulation Score")
 plt.savefig("insulation.png")
 plt.show()
 
