@@ -140,7 +140,6 @@ ax[0].imshow(empty1, cmap = "magma_r", vmax = 10)
 ax[1].imshow(empty2, cmap = "magma_r", vmax = 10)
 ax[2].imshow(empty3, cmap = "seismic", norm = colors.CenteredNorm())
 
-## labeling
-
+fig.tight_layout(pad=1.0)
 plt.savefig("three_plots_total.png")
 plt.show()
