@@ -1,0 +1,1633 @@
+(medaka) [~/qbb2022-answers/week8-homework $]medaka_variant -i methylation.bam -f hg38.fa -p -r chr11:1900000-2800000
+
+++ Preparing data
+- Checking program versions
+Program    Version    Required   Pass     
+bcftools   1.10.2     1.9        True     
+bgzip      1.10.2     1.9        True     
+minimap2   2.24       2.11       True     
+samtools   1.10       1.9        True     
+tabix      1.10.2     1.9        True     
++ Extracting region from bam
+- Extracting regions chr11:1900000-2800000 from bam /Users/cmdb/qbb2022-answers/week8-homework/methylation.bam 
++ Indexing bam
+- Running samtools index on methylation.bam.
+  Bam index in medaka_variant/methylation.bam.bai.
+
+++ Running first pass to haplotag reads.
++ Running consensus calling
+- Running medaka consensus with methylation.bam --model r941_prom_snp_g360 
+[12:39:59 - Predict] Processing region(s): chr11:1900000-2800000
+[12:39:59 - Predict] Setting tensorflow threads to 1.
+[12:39:59 - Predict] Processing 1 long region(s) with batching.
+[12:39:59 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_snp_g360_model.hdf5.
+[12:39:59 - ModelLoad] Building model with cudnn optimization: False
+[12:40:00 - DLoader] Initializing data loader
+[12:40:00 - Sampler] Initializing sampler for consensus of region chr11:1900000-2800000.
+[12:40:00 - PWorker] Running inference for 0.9M draft bases.
+[12:40:00 - Feature] Processed chr11:1900000.0-2799999.1 (median depth 83.0)
+[12:40:00 - Sampler] Took 0.63s to make features.
+[12:41:59 - PWorker] 54.6% Done (0.5/0.9 Mbases) in 119.5s
+[12:41:59 - PWorker] Samples in cache: 0.
+[12:43:39 - PWorker] 100.0% Done (0.9/0.9 Mbases) in 219.7s
+[12:43:40 - PWorker] All done, 0 remainder regions.
+[12:43:40 - Predict] Finished processing all regions.
++ Running snp calling
+- Running medaka snp
+[12:43:42 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[12:43:42 - SNPs] Processing chr11:1900000-2800000.
+/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/labels.py:381: RuntimeWarning: divide by zero encountered in log10
+  q = -10 * np.log10(err)
+  VCF written to medaka_variant/round_0_hap_mixed_unphased.vcf.
++ Phasing vcf
++ Indexing fasta
+- Using existing output:  medaka_variant//Users/cmdb/qbb2022-answers/week8-homework/hg38.fa.fai.
+- Running whatshap phase for: round_0_hap_mixed_unphased.vcf > round_0_hap_mixed_phased.vcf.
+This is WhatsHap 0.18 running under Python 3.6.13
+Traceback (most recent call last):
+  File "/Users/cmdb/miniconda3/envs/medaka/bin/whatshap", line 10, in <module>
+    sys.exit(main())
+  File "/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/whatshap/__main__.py", line 83, in main
+    module.main(args)
+  File "/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/whatshap/phase.py", line 1114, in main
+    run_whatshap(**vars(args))
+  File "/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/whatshap/phase.py", line 580, in run_whatshap
+    out_file=output, tag=tag)
+  File "/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/whatshap/vcf.py", line 493, in __init__
+    fmt = vcf.parser._Format(id=tag, num=1, type='Integer', desc=desc)
+TypeError: __new__() missing 1 required positional argument: 'type_code'
+* Failed to phase variants in round_0_hap_mixed_unphased.vcf.
+(medaka) [~/qbb2022-answers/week8-homework $]sudo /usr/bin/xcode-select --install
+Password:
+xcode-select: note: install requested for command line developer tools
+(medaka) [~/qbb2022-answers/week8-homework $]pip install whatshap==1.0
+Collecting whatshap==1.0
+  Using cached whatshap-1.0.tar.gz (579 kB)
+Requirement already satisfied: pysam~=0.16.0 in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from whatshap==1.0) (0.16.0.1)
+Requirement already satisfied: pyfaidx>=0.5.5.2 in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from whatshap==1.0) (0.7.1)
+Requirement already satisfied: networkx in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from whatshap==1.0) (2.5)
+Requirement already satisfied: biopython>=1.73 in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from whatshap==1.0) (1.78)
+Requirement already satisfied: scipy in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from whatshap==1.0) (1.2.1)
+Requirement already satisfied: xopen in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from whatshap==1.0) (0.7.3)
+Requirement already satisfied: numpy in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from biopython>=1.73->whatshap==1.0) (1.16.1)
+Requirement already satisfied: six in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from pyfaidx>=0.5.5.2->whatshap==1.0) (1.16.0)
+Requirement already satisfied: setuptools>=0.7 in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from pyfaidx>=0.5.5.2->whatshap==1.0) (58.0.4)
+Requirement already satisfied: decorator>=4.3.0 in /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages (from networkx->whatshap==1.0) (5.1.1)
+Building wheels for collected packages: whatshap
+  Building wheel for whatshap (setup.py) ... done
+  Created wheel for whatshap: filename=whatshap-1.0-cp36-cp36m-macosx_10_9_x86_64.whl size=602629 sha256=dd5ccf0a77513e0d84d7abe0c91ee227b1ddb8d70bdd618016dc0e9a5097d015
+  Stored in directory: /Users/cmdb/Library/Caches/pip/wheels/1b/de/8e/54ec55924e7594bb108a161c4ac613a8ace17a6ea2c059d10c
+Successfully built whatshap
+Installing collected packages: whatshap
+  Attempting uninstall: whatshap
+    Found existing installation: whatshap 0.18
+    Uninstalling whatshap-0.18:
+      Successfully uninstalled whatshap-0.18
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+medaka 1.0.3 requires biopython<1.77,>=1.73, but you have biopython 1.78 which is incompatible.
+medaka 1.0.3 requires grpcio==1.27.2, but you have grpcio 1.36.1 which is incompatible.
+medaka 1.0.3 requires ont-fast5-api==3.0.0, but you have ont-fast5-api 4.1.0 which is incompatible.
+medaka 1.0.3 requires pysam==0.15.2, but you have pysam 0.16.0.1 which is incompatible.
+medaka 1.0.3 requires whatshap==0.18, but you have whatshap 1.0 which is incompatible.
+Successfully installed whatshap-1.0
+(medaka) [~/qbb2022-answers/week8-homework $]medaka_variant -i methylation.bam -f hg38.fa -p -r chr11:1900000-2800000
+
+++ Preparing data
+- Checking program versions
+Program    Version    Required   Pass     
+bcftools   1.10.2     1.9        True     
+bgzip      1.10.2     1.9        True     
+minimap2   2.24       2.11       True     
+samtools   1.10       1.9        True     
+tabix      1.10.2     1.9        True     
+- Warning: Output medaka_variant already exists, may use old results.
++ Extracting region from bam
+- Not extracting regions from bam, methylation.bam exists.
++ Indexing bam
+- Using existing output:  medaka_variant/methylation.bam.bai.
+
+++ Running first pass to haplotag reads.
++ Running consensus calling
+- Not running medaka consensus, round_0_hap_mixed_probs.hdf exists.
++ Running snp calling
+- Using existing output:  medaka_variant/round_0_hap_mixed_unphased.vcf.
++ Phasing vcf
++ Indexing fasta
+- Using existing output:  medaka_variant//Users/cmdb/qbb2022-answers/week8-homework/hg38.fa.fai.
+- Using existing output:  medaka_variant/round_0_hap_mixed_phased.vcf.
++ Compressing vcf
+- Compressing round_0_hap_mixed_phased.vcf.
+  Compressed file written to medaka_variant/round_0_hap_mixed_phased.vcf.gz.
++ Indexing vcf
+- Indexing round_0_hap_mixed_phased.vcf.gz.
+  Indexed file written to medaka_variant/round_0_hap_mixed_phased.vcf.gz.tbi.
++ Tagging reads
+- Running whatshap tag for: round_0_hap_mixed_phased.vcf.gz > round_0_hap_mixed_phased.bam
+Traceback (most recent call last):
+  File "/Users/cmdb/miniconda3/envs/medaka/bin/whatshap", line 8, in <module>
+    sys.exit(main())
+  File "/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/whatshap/__main__.py", line 83, in main
+    module.main(args)
+  File "/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/whatshap/cli/haplotag.py", line 594, in main
+    run_haplotag(**vars(args))
+  File "/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/whatshap/cli/haplotag.py", line 479, in run_haplotag
+    vcf_reader = stack.enter_context(VcfReader(variant_file, indels=True, phases=True))
+  File "/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/whatshap/vcf.py", line 348, in __init__
+    self._vcf_reader = VariantFile(path)
+  File "pysam/libcbcf.pyx", line 4036, in pysam.libcbcf.VariantFile.__init__
+  File "pysam/libcbcf.pyx", line 4266, in pysam.libcbcf.VariantFile.open
+ValueError: invalid file `b'round_0_hap_mixed_phased.vcf.gz'` (mode=`b'r'`) - is it VCF/BCF format?
+Failed to partition reads in round 0.
+(medaka) [~/qbb2022-answers/week8-homework $]medaka_variant -i methylation.bam -f hg38.fa -p -r chr11:1900000-2800000
+
+++ Preparing data
+- Checking program versions
+Program    Version    Required   Pass     
+bcftools   1.10.2     1.9        True     
+bgzip      1.10.2     1.9        True     
+minimap2   2.24       2.11       True     
+samtools   1.10       1.9        True     
+tabix      1.10.2     1.9        True     
++ Extracting region from bam
+- Extracting regions chr11:1900000-2800000 from bam /Users/cmdb/qbb2022-answers/week8-homework/methylation.bam 
++ Indexing bam
+- Running samtools index on methylation.bam.
+  Bam index in medaka_variant/methylation.bam.bai.
+
+++ Running first pass to haplotag reads.
++ Running consensus calling
+- Running medaka consensus with methylation.bam --model r941_prom_snp_g360 
+[12:57:00 - Predict] Processing region(s): chr11:1900000-2800000
+[12:57:00 - Predict] Setting tensorflow threads to 1.
+[12:57:00 - Predict] Processing 1 long region(s) with batching.
+[12:57:00 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_snp_g360_model.hdf5.
+[12:57:00 - ModelLoad] Building model with cudnn optimization: False
+[12:57:01 - DLoader] Initializing data loader
+[12:57:01 - Sampler] Initializing sampler for consensus of region chr11:1900000-2800000.
+[12:57:01 - PWorker] Running inference for 0.9M draft bases.
+[12:57:02 - Feature] Processed chr11:1900000.0-2799999.1 (median depth 83.0)
+[12:57:02 - Sampler] Took 0.59s to make features.
+[12:59:02 - PWorker] 54.6% Done (0.5/0.9 Mbases) in 120.3s
+[12:59:02 - PWorker] Samples in cache: 0.
+[13:00:43 - PWorker] 100.0% Done (0.9/0.9 Mbases) in 221.3s
+[13:00:44 - PWorker] All done, 0 remainder regions.
+[13:00:44 - Predict] Finished processing all regions.
++ Running snp calling
+- Running medaka snp
+[13:00:45 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:00:45 - SNPs] Processing chr11:1900000-2800000.
+/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/labels.py:381: RuntimeWarning: divide by zero encountered in log10
+  q = -10 * np.log10(err)
+  VCF written to medaka_variant/round_0_hap_mixed_unphased.vcf.
++ Phasing vcf
++ Indexing fasta
+- Using existing output:  medaka_variant//Users/cmdb/qbb2022-answers/week8-homework/hg38.fa.fai.
+- Running whatshap phase for: round_0_hap_mixed_unphased.vcf > round_0_hap_mixed_phased.vcf.
+This is WhatsHap 1.0 running under Python 3.6.13
+Working on 1 samples from 1 family
+======== Working on chromosome 'chr11'
+---- Processing individual SAMPLE
+Using maximum coverage per sample of 15X
+Number of variants skipped due to missing genotypes: 0
+Number of remaining heterozygous variants: 906
+Reading alignments and detecting alleles ...
+Found 3365 reads covering 905 variants
+Kept 3027 reads that cover at least two variants each
+Reducing coverage to at most 15X by selecting most informative reads ...
+Selected 383 reads covering 905 variants
+Best-case phasing would result in 2 non-singleton phased blocks (2 in total)
+... after read selection: 2 non-singleton phased blocks (2 in total)
+Variants covered by at least one phase-informative read in at least one individual after read selection: 905
+Phasing 1 sample by solving the MEC problem ...
+MEC cost: 7860
+No. of phased blocks: 2
+Largest component contains 870 variants (96.1% of accessible variants) between position 1954146 and 2798052
+======== Writing VCF
+Done writing VCF
+
+== SUMMARY ==
+Time spent reading BAM/CRAM:                    2.1 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.3 s
+Time spent phasing:                             4.6 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.2 s
+Total elapsed time:                             7.2 s
+  Phased VCF written to medaka_variant/round_0_hap_mixed_phased.vcf.
++ Compressing vcf
+- Compressing round_0_hap_mixed_phased.vcf.
+  Compressed file written to medaka_variant/round_0_hap_mixed_phased.vcf.gz.
++ Indexing vcf
+- Indexing round_0_hap_mixed_phased.vcf.gz.
+  Indexed file written to medaka_variant/round_0_hap_mixed_phased.vcf.gz.tbi.
++ Tagging reads
+- Running whatshap tag for: round_0_hap_mixed_phased.vcf.gz > round_0_hap_mixed_phased.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments and detecting alleles ...
+Found 3365 reads covering 905 variants
+
+== SUMMARY ==
+Total alignments processed:                      4063
+Alignments that could be tagged:                 3323
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 4.635826826095581
+  Tagged reads written to medaka_variant/round_0_hap_mixed_phased.bam.
++ Indexing bam
+- Running samtools index on round_0_hap_mixed_phased.bam.
+  Bam index in medaka_variant/round_0_hap_mixed_phased.bam.bai.
+
+++ Running second pass to produce variant calls.
++ Running consensus calling
+- Running medaka consensus with round_0_hap_mixed_phased.bam --model r941_prom_variant_g360 --tag_name HP --tag_value 1 --tag_keep_missing
+[13:01:03 - Predict] Processing region(s): chr11:1900000-2800000
+[13:01:03 - Predict] Setting tensorflow threads to 1.
+[13:01:03 - Predict] Processing 1 long region(s) with batching.
+[13:01:03 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_variant_g360_model.hdf5.
+[13:01:03 - ModelLoad] Building model with cudnn optimization: False
+[13:01:04 - DLoader] Initializing data loader
+[13:01:04 - Sampler] Initializing sampler for consensus of region chr11:1900000-2800000.
+[13:01:04 - PWorker] Running inference for 0.9M draft bases.
+[13:01:05 - Feature] Processed chr11:1900000.0-2799999.1 (median depth 42.0)
+[13:01:05 - Sampler] Took 0.42s to make features.
+[13:03:05 - PWorker] 68.1% Done (0.6/0.9 Mbases) in 120.2s
+[13:03:05 - PWorker] Samples in cache: 0.
+[13:04:09 - PWorker] 100.0% Done (0.9/0.9 Mbases) in 185.0s
+[13:04:10 - PWorker] All done, 0 remainder regions.
+[13:04:10 - Predict] Finished processing all regions.
++ Running variant calling
+- Running medaka variant
+[13:04:11 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:04:11 - Variants] Processing chr11:1900000-2800000.
+  VCF written to medaka_variant/round_1_hap_1.vcf.
++ Running consensus calling
+- Running medaka consensus with round_0_hap_mixed_phased.bam --model r941_prom_variant_g360 --tag_name HP --tag_value 2 --tag_keep_missing
+[13:04:19 - Predict] Processing region(s): chr11:1900000-2800000
+[13:04:19 - Predict] Setting tensorflow threads to 1.
+[13:04:19 - Predict] Processing 1 long region(s) with batching.
+[13:04:19 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_variant_g360_model.hdf5.
+[13:04:19 - ModelLoad] Building model with cudnn optimization: False
+[13:04:20 - DLoader] Initializing data loader
+[13:04:20 - Sampler] Initializing sampler for consensus of region chr11:1900000-2800000.
+[13:04:20 - PWorker] Running inference for 0.9M draft bases.
+[13:04:20 - Feature] Processed chr11:1900000.0-2799999.0 (median depth 44.0)
+[13:04:20 - Sampler] Took 0.44s to make features.
+[13:06:20 - PWorker] 64.8% Done (0.6/0.9 Mbases) in 120.2s
+[13:06:20 - PWorker] Samples in cache: 0.
+[13:07:31 - PWorker] 100.0% Done (0.9/0.9 Mbases) in 191.8s
+[13:07:32 - PWorker] All done, 0 remainder regions.
+[13:07:32 - Predict] Finished processing all regions.
++ Running variant calling
+- Running medaka variant
+[13:07:33 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:07:33 - Variants] Processing chr11:1900000-2800000.
+  VCF written to medaka_variant/round_1_hap_2.vcf.
++ Merging vcfs to diploid vcf
+- Running medaka haploid2diploid 
+[13:07:41 - VCFMERGE] Merging variants in chrom chr11
+  VCF written to medaka_variant/round_1_unfiltered.vcf.
+sed: -I or -i may not be used with stdin
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap SUBCOMMAND --help
+usage: whatshap [-h] [--version] [--debug]
+                {compare,find_snv_candidates,genotype,hapcut2vcf,haplotag,phase,polyphase,split,stats,unphase}
+                ...
+
+positional arguments:
+  {compare,find_snv_candidates,genotype,hapcut2vcf,haplotag,phase,polyphase,split,stats,unphase}
+    compare             Compare two or more phasings
+    find_snv_candidates
+                        Generate candidate SNP positions.
+    genotype            Genotype variants
+    hapcut2vcf          Convert hapCUT output format to VCF
+    haplotag            Tag reads by haplotype
+    phase               Phase variants in a VCF with the WhatsHap algorithm
+    polyphase           Phase variants in a polyploid VCF using a
+                        clustering+threading algorithm.
+    split               Split reads by haplotype.
+    stats               Print phasing statistics of a single VCF file
+    unphase             Remove phasing information from a VCF file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --debug               Print debug messages
+whatshap: error: invalid choice: 'SUBCOMMAND' (choose from 'compare', 'find_snv_candidates', 'genotype', 'hapcut2vcf', 'haplotag', 'phase', 'polyphase', 'split', 'stats', 'unphase')
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag --help
+usage: whatshap haplotag [-h] [-o OUTPUT] [--reference FASTA]
+                         [--regions REGION] [--ignore-linked-read]
+                         [--linked-read-distance-cutoff LINKEDREADDISTANCE]
+                         [--ignore-read-groups] [--sample SAMPLE]
+                         [--output-haplotag-list HAPLOTAG_LIST]
+                         [--tag-supplementary]
+                         VCF ALIGNMENTS
+
+Tag reads by haplotype
+
+Sequencing reads are read from file ALIGNMENTS (in BAM format) and tagged reads
+are written to stdout.
+
+positional arguments:
+  VCF                   VCF file with phased variants (must be gzip-compressed
+                        and indexed)
+  ALIGNMENTS            File (BAM/CRAM) with read alignments to be tagged by
+                        haplotype
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT, --output OUTPUT
+                        Output file. If omitted, use standard output.
+  --reference FASTA, -r FASTA
+                        Reference file. Provide this to detect alleles through
+                        re-alignment. If no index (.fai) exists, it will be
+                        created
+  --regions REGION      Specify region(s) of interest to limit the tagging to
+                        reads/variants overlapping those regions. You can
+                        specify a space-separated list of regions in the form
+                        of chrom:start-end, chrom (consider entire
+                        chromosome), or chrom:start (consider region from this
+                        start to end of chromosome).
+  --ignore-linked-read  Ignore linkage information stored in BX tags of the
+                        reads.
+  --linked-read-distance-cutoff LINKEDREADDISTANCE, -d LINKEDREADDISTANCE
+                        Assume reads with identical BX tags belong to
+                        different read clouds if their distance is larger than
+                        LINKEDREADDISTANCE (default: 50000).
+  --ignore-read-groups  Ignore read groups in BAM/CRAM header and assume all
+                        reads come from the same sample.
+  --sample SAMPLE       Name of a sample to phase. If not given, all samples
+                        in the input VCF are phased. Can be used multiple
+                        times.
+  --output-haplotag-list HAPLOTAG_LIST
+                        Write assignments of read names to haplotypes (tab
+                        separated) to given output file. If filename ends in
+                        .gz, then output is gzipped.
+  --tag-supplementary   Also tag supplementary alignments. Supplementary
+                        alignments are assigned to the same haplotype the
+                        primary alignment has been assigned to (default: only
+                        tag primary alignments).
+(medaka) [~/qbb2022-answers/week8-homework $]mkdir chr14
+(medaka) [~/qbb2022-answers/week8-homework $]mkdir chr15
+(medaka) [~/qbb2022-answers/week8-homework $]mkdir chr 20
+(medaka) [~/qbb2022-answers/week8-homework $]mkdir chr20
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr11p15.5.vcf --reference hg38.fa --regions chr11:1900000:2800000 ./chr11/round_0_hap_mixed_phased.vcf.gz ./chr11/round_0_hap_mixed_phased.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments for sample 'SAMPLE' and detecting alleles ...
+Found 3365 reads covering 905 variants
+
+== SUMMARY ==
+Total alignments processed:                      4063
+Alignments that could be tagged:                 3323
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 4.565088987350464
+(medaka) [~/qbb2022-answers/week8-homework $]medaka_variant -i methylation.bam -f hg38.fa -p -r chr14:100700000-100990000 -o ./chr14
+
+++ Preparing data
+- Checking program versions
+Program    Version    Required   Pass     
+bcftools   1.10.2     1.9        True     
+bgzip      1.10.2     1.9        True     
+minimap2   2.24       2.11       True     
+samtools   1.10       1.9        True     
+tabix      1.10.2     1.9        True     
+- Warning: Output ./chr14 already exists, may use old results.
++ Extracting region from bam
+- Extracting regions chr14:100700000-100990000 from bam /Users/cmdb/qbb2022-answers/week8-homework/methylation.bam 
++ Indexing bam
+- Running samtools index on methylation.bam.
+  Bam index in ./chr14/methylation.bam.bai.
+
+++ Running first pass to haplotag reads.
++ Running consensus calling
+- Running medaka consensus with methylation.bam --model r941_prom_snp_g360 
+[13:24:24 - Predict] Processing region(s): chr14:100700000-100990000
+[13:24:24 - Predict] Setting tensorflow threads to 1.
+[13:24:24 - Predict] Processing 1 long region(s) with batching.
+[13:24:24 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_snp_g360_model.hdf5.
+[13:24:24 - ModelLoad] Building model with cudnn optimization: False
+[13:24:25 - DLoader] Initializing data loader
+[13:24:25 - Sampler] Initializing sampler for consensus of region chr14:100700000-100990000.
+[13:24:25 - PWorker] Running inference for 0.3M draft bases.
+[13:24:25 - Feature] Processed chr14:100700000.0-100989999.0 (median depth 82.0)
+[13:24:25 - Sampler] Took 0.28s to make features.
+[13:25:53 - PWorker] 100.0% Done (0.3/0.3 Mbases) in 88.1s
+[13:25:54 - PWorker] All done, 0 remainder regions.
+[13:25:54 - Predict] Finished processing all regions.
++ Running snp calling
+- Running medaka snp
+[13:25:56 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:25:56 - SNPs] Processing chr14:100700000-100990000.
+/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/labels.py:381: RuntimeWarning: divide by zero encountered in log10
+  q = -10 * np.log10(err)
+  VCF written to ./chr14/round_0_hap_mixed_unphased.vcf.
++ Phasing vcf
++ Indexing fasta
+- Using existing output:  ./chr14//Users/cmdb/qbb2022-answers/week8-homework/hg38.fa.fai.
+- Running whatshap phase for: round_0_hap_mixed_unphased.vcf > round_0_hap_mixed_phased.vcf.
+This is WhatsHap 1.0 running under Python 3.6.13
+Working on 1 samples from 1 family
+======== Working on chromosome 'chr14'
+---- Processing individual SAMPLE
+Using maximum coverage per sample of 15X
+Number of variants skipped due to missing genotypes: 0
+Number of remaining heterozygous variants: 282
+Reading alignments and detecting alleles ...
+Found 1314 reads covering 282 variants
+Kept 1227 reads that cover at least two variants each
+Reducing coverage to at most 15X by selecting most informative reads ...
+Selected 130 reads covering 282 variants
+Best-case phasing would result in 1 non-singleton phased blocks (1 in total)
+... after read selection: 1 non-singleton phased blocks (1 in total)
+Variants covered by at least one phase-informative read in at least one individual after read selection: 282
+Phasing 1 sample by solving the MEC problem ...
+MEC cost: 2460
+No. of phased blocks: 1
+Largest component contains 282 variants (100.0% of accessible variants) between position 100700587 and 100988413
+======== Writing VCF
+Done writing VCF
+
+== SUMMARY ==
+Time spent reading BAM/CRAM:                    0.8 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.1 s
+Time spent phasing:                             1.5 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.1 s
+Total elapsed time:                             2.4 s
+  Phased VCF written to ./chr14/round_0_hap_mixed_phased.vcf.
++ Compressing vcf
+- Compressing round_0_hap_mixed_phased.vcf.
+  Compressed file written to ./chr14/round_0_hap_mixed_phased.vcf.gz.
++ Indexing vcf
+- Indexing round_0_hap_mixed_phased.vcf.gz.
+  Indexed file written to ./chr14/round_0_hap_mixed_phased.vcf.gz.tbi.
++ Tagging reads
+- Running whatshap tag for: round_0_hap_mixed_phased.vcf.gz > round_0_hap_mixed_phased.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments and detecting alleles ...
+Found 1314 reads covering 282 variants
+
+== SUMMARY ==
+Total alignments processed:                      1439
+Alignments that could be tagged:                 1303
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 1.6890232563018799
+  Tagged reads written to ./chr14/round_0_hap_mixed_phased.bam.
++ Indexing bam
+- Running samtools index on round_0_hap_mixed_phased.bam.
+  Bam index in ./chr14/round_0_hap_mixed_phased.bam.bai.
+
+++ Running second pass to produce variant calls.
++ Running consensus calling
+- Running medaka consensus with round_0_hap_mixed_phased.bam --model r941_prom_variant_g360 --tag_name HP --tag_value 1 --tag_keep_missing
+[13:26:04 - Predict] Processing region(s): chr14:100700000-100990000
+[13:26:04 - Predict] Setting tensorflow threads to 1.
+[13:26:04 - Predict] Processing 1 long region(s) with batching.
+[13:26:04 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_variant_g360_model.hdf5.
+[13:26:04 - ModelLoad] Building model with cudnn optimization: False
+[13:26:05 - DLoader] Initializing data loader
+[13:26:05 - Sampler] Initializing sampler for consensus of region chr14:100700000-100990000.
+[13:26:05 - PWorker] Running inference for 0.3M draft bases.
+[13:26:05 - Feature] Processed chr14:100700000.0-100989999.0 (median depth 39.0)
+[13:26:05 - Sampler] Took 0.20s to make features.
+[13:27:18 - PWorker] 100.0% Done (0.3/0.3 Mbases) in 73.7s
+[13:27:19 - PWorker] All done, 0 remainder regions.
+[13:27:19 - Predict] Finished processing all regions.
++ Running variant calling
+- Running medaka variant
+[13:27:20 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:27:20 - Variants] Processing chr14:100700000-100990000.
+  VCF written to ./chr14/round_1_hap_1.vcf.
++ Running consensus calling
+- Running medaka consensus with round_0_hap_mixed_phased.bam --model r941_prom_variant_g360 --tag_name HP --tag_value 2 --tag_keep_missing
+[13:27:24 - Predict] Processing region(s): chr14:100700000-100990000
+[13:27:24 - Predict] Setting tensorflow threads to 1.
+[13:27:24 - Predict] Processing 1 long region(s) with batching.
+[13:27:24 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_variant_g360_model.hdf5.
+[13:27:24 - ModelLoad] Building model with cudnn optimization: False
+[13:27:25 - DLoader] Initializing data loader
+[13:27:25 - PWorker] Running inference for 0.3M draft bases.
+[13:27:25 - Sampler] Initializing sampler for consensus of region chr14:100700000-100990000.
+[13:27:25 - Feature] Processed chr14:100700000.0-100989999.0 (median depth 43.0)
+[13:27:25 - Sampler] Took 0.19s to make features.
+[13:28:39 - PWorker] 100.0% Done (0.3/0.3 Mbases) in 74.5s
+[13:28:40 - PWorker] All done, 0 remainder regions.
+[13:28:40 - Predict] Finished processing all regions.
++ Running variant calling
+- Running medaka variant
+[13:28:41 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:28:41 - Variants] Processing chr14:100700000-100990000.
+  VCF written to ./chr14/round_1_hap_2.vcf.
++ Merging vcfs to diploid vcf
+- Running medaka haploid2diploid 
+[13:28:45 - VCFMERGE] Merging variants in chrom chr14
+  VCF written to ./chr14/round_1_unfiltered.vcf.
+sed: -I or -i may not be used with stdin
+(medaka) [~/qbb2022-answers/week8-homework $]medaka_variant -i methylation.bam -f hg38.fa -p -r chr15:23600000-25900000 -o ./chr15
+
+++ Preparing data
+- Checking program versions
+Program    Version    Required   Pass     
+bcftools   1.10.2     1.9        True     
+bgzip      1.10.2     1.9        True     
+minimap2   2.24       2.11       True     
+samtools   1.10       1.9        True     
+tabix      1.10.2     1.9        True     
+- Warning: Output ./chr15 already exists, may use old results.
++ Extracting region from bam
+- Extracting regions chr15:23600000-25900000 from bam /Users/cmdb/qbb2022-answers/week8-homework/methylation.bam 
++ Indexing bam
+- Running samtools index on methylation.bam.
+  Bam index in ./chr15/methylation.bam.bai.
+
+++ Running first pass to haplotag reads.
++ Running consensus calling
+- Running medaka consensus with methylation.bam --model r941_prom_snp_g360 
+[13:31:21 - Predict] Processing region(s): chr15:23600000-25900000
+[13:31:21 - Predict] Setting tensorflow threads to 1.
+[13:31:21 - Predict] Processing 3 long region(s) with batching.
+[13:31:21 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_snp_g360_model.hdf5.
+[13:31:21 - ModelLoad] Building model with cudnn optimization: False
+[13:31:22 - DLoader] Initializing data loader
+[13:31:22 - PWorker] Running inference for 2.3M draft bases.
+[13:31:22 - Sampler] Initializing sampler for consensus of region chr15:23600000-24600000.
+[13:31:22 - Sampler] Initializing sampler for consensus of region chr15:24599000-25599000.
+[13:31:22 - Sampler] Initializing sampler for consensus of region chr15:25598000-25900000.
+[13:31:22 - Feature] Processed chr15:25598000.0-25899999.1 (median depth 77.0)
+[13:31:22 - Sampler] Took 0.76s to make features.
+[13:31:23 - Feature] Processed chr15:23600000.0-24599999.0 (median depth 79.0)
+[13:31:23 - Sampler] Took 1.07s to make features.
+[13:31:23 - Feature] Processed chr15:24599000.0-25598999.2 (median depth 80.0)
+[13:31:23 - Sampler] Took 1.13s to make features.
+[13:33:23 - PWorker] 22.6% Done (0.5/2.3 Mbases) in 121.8s
+[13:33:23 - PWorker] Samples in cache: 236.
+[13:35:24 - PWorker] 46.6% Done (1.1/2.3 Mbases) in 242.8s
+[13:35:24 - PWorker] Samples in cache: 136.
+[13:37:25 - PWorker] 69.4% Done (1.6/2.3 Mbases) in 363.8s
+[13:37:25 - PWorker] Samples in cache: 36.
+[13:39:26 - PWorker] 92.7% Done (2.1/2.3 Mbases) in 484.5s
+[13:39:26 - PWorker] Samples in cache: 0.
+[13:40:23 - PWorker] 100.0% Done (2.3/2.3 Mbases) in 540.9s
+[13:40:23 - PWorker] All done, 0 remainder regions.
+[13:40:23 - Predict] Finished processing all regions.
++ Running snp calling
+- Running medaka snp
+[13:40:25 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:40:25 - SNPs] Processing chr15:23600000-25900000.
+/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/labels.py:381: RuntimeWarning: divide by zero encountered in log10
+  q = -10 * np.log10(err)
+  VCF written to ./chr15/round_0_hap_mixed_unphased.vcf.
++ Phasing vcf
++ Indexing fasta
+- Using existing output:  ./chr15//Users/cmdb/qbb2022-answers/week8-homework/hg38.fa.fai.
+- Running whatshap phase for: round_0_hap_mixed_unphased.vcf > round_0_hap_mixed_phased.vcf.
+This is WhatsHap 1.0 running under Python 3.6.13
+Working on 1 samples from 1 family
+======== Working on chromosome 'chr15'
+---- Processing individual SAMPLE
+Using maximum coverage per sample of 15X
+Number of variants skipped due to missing genotypes: 0
+Number of remaining heterozygous variants: 2540
+Reading alignments and detecting alleles ...
+Found 8115 reads covering 2540 variants
+Kept 6949 reads that cover at least two variants each
+Reducing coverage to at most 15X by selecting most informative reads ...
+Selected 944 reads covering 2540 variants
+Best-case phasing would result in 2 non-singleton phased blocks (2 in total)
+... after read selection: 2 non-singleton phased blocks (2 in total)
+Variants covered by at least one phase-informative read in at least one individual after read selection: 2540
+Phasing 1 sample by solving the MEC problem ...
+MEC cost: 19830
+No. of phased blocks: 2
+Largest component contains 1702 variants (67.0% of accessible variants) between position 23600050 and 24653724
+======== Writing VCF
+Done writing VCF
+
+== SUMMARY ==
+Time spent reading BAM/CRAM:                    4.3 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.8 s
+Time spent phasing:                            12.3 s
+Time spent writing VCF:                         0.1 s
+Time spent finding components:                  0.1 s
+Time spent on rest:                             0.5 s
+Total elapsed time:                            18.2 s
+  Phased VCF written to ./chr15/round_0_hap_mixed_phased.vcf.
++ Compressing vcf
+- Compressing round_0_hap_mixed_phased.vcf.
+  Compressed file written to ./chr15/round_0_hap_mixed_phased.vcf.gz.
++ Indexing vcf
+- Indexing round_0_hap_mixed_phased.vcf.gz.
+  Indexed file written to ./chr15/round_0_hap_mixed_phased.vcf.gz.tbi.
++ Tagging reads
+- Running whatshap tag for: round_0_hap_mixed_phased.vcf.gz > round_0_hap_mixed_phased.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments and detecting alleles ...
+Found 8115 reads covering 2539 variants
+
+== SUMMARY ==
+Total alignments processed:                     10395
+Alignments that could be tagged:                 8000
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 10.469730138778687
+  Tagged reads written to ./chr15/round_0_hap_mixed_phased.bam.
++ Indexing bam
+- Running samtools index on round_0_hap_mixed_phased.bam.
+  Bam index in ./chr15/round_0_hap_mixed_phased.bam.bai.
+
+++ Running second pass to produce variant calls.
++ Running consensus calling
+- Running medaka consensus with round_0_hap_mixed_phased.bam --model r941_prom_variant_g360 --tag_name HP --tag_value 1 --tag_keep_missing
+[13:41:04 - Predict] Processing region(s): chr15:23600000-25900000
+[13:41:04 - Predict] Setting tensorflow threads to 1.
+[13:41:04 - Predict] Processing 3 long region(s) with batching.
+[13:41:04 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_variant_g360_model.hdf5.
+[13:41:04 - ModelLoad] Building model with cudnn optimization: False
+[13:41:05 - DLoader] Initializing data loader
+[13:41:05 - Sampler] Initializing sampler for consensus of region chr15:23600000-24600000.
+[13:41:05 - PWorker] Running inference for 2.3M draft bases.
+[13:41:05 - Sampler] Initializing sampler for consensus of region chr15:24599000-25599000.
+[13:41:05 - Sampler] Initializing sampler for consensus of region chr15:25598000-25900000.
+[13:41:06 - Feature] Processed chr15:25598000.0-25899999.0 (median depth 38.0)
+[13:41:06 - Sampler] Took 0.55s to make features.
+[13:41:06 - Feature] Processed chr15:23600000.0-24599999.0 (median depth 42.0)
+[13:41:06 - Sampler] Took 0.76s to make features.
+[13:41:06 - Feature] Processed chr15:24599000.0-25598999.2 (median depth 45.0)
+[13:41:06 - Sampler] Took 0.80s to make features.
+[13:43:06 - PWorker] 27.0% Done (0.6/2.3 Mbases) in 121.0s
+[13:43:06 - PWorker] Samples in cache: 170.
+[13:45:06 - PWorker] 55.2% Done (1.3/2.3 Mbases) in 241.2s
+[13:45:06 - PWorker] Samples in cache: 70.
+[13:47:06 - PWorker] 81.7% Done (1.9/2.3 Mbases) in 360.5s
+[13:47:06 - PWorker] Samples in cache: 0.
+[13:48:35 - PWorker] 100.0% Done (2.3/2.3 Mbases) in 450.2s
+[13:48:36 - PWorker] All done, 0 remainder regions.
+[13:48:36 - Predict] Finished processing all regions.
++ Running variant calling
+- Running medaka variant
+[13:48:38 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:48:38 - Variants] Processing chr15:23600000-25900000.
+  VCF written to ./chr15/round_1_hap_1.vcf.
++ Running consensus calling
+- Running medaka consensus with round_0_hap_mixed_phased.bam --model r941_prom_variant_g360 --tag_name HP --tag_value 2 --tag_keep_missing
+[13:48:53 - Predict] Processing region(s): chr15:23600000-25900000
+[13:48:53 - Predict] Setting tensorflow threads to 1.
+[13:48:53 - Predict] Processing 3 long region(s) with batching.
+[13:48:53 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_variant_g360_model.hdf5.
+[13:48:53 - ModelLoad] Building model with cudnn optimization: False
+[13:48:54 - DLoader] Initializing data loader
+[13:48:54 - Sampler] Initializing sampler for consensus of region chr15:23600000-24600000.
+[13:48:54 - PWorker] Running inference for 2.3M draft bases.
+[13:48:54 - Sampler] Initializing sampler for consensus of region chr15:24599000-25599000.
+[13:48:54 - Sampler] Initializing sampler for consensus of region chr15:25598000-25900000.
+[13:48:55 - Feature] Processed chr15:25598000.0-25899999.1 (median depth 42.0)
+[13:48:55 - Sampler] Took 0.61s to make features.
+[13:48:55 - Feature] Processed chr15:23600000.0-24599999.0 (median depth 42.0)
+[13:48:55 - Sampler] Took 0.83s to make features.
+[13:48:55 - Feature] Processed chr15:24599000.0-25598999.0 (median depth 43.0)
+[13:48:55 - Sampler] Took 0.84s to make features.
+[13:50:55 - PWorker] 27.6% Done (0.6/2.3 Mbases) in 120.9s
+[13:50:55 - PWorker] Samples in cache: 165.
+[13:52:53 - PWorker] 56.0% Done (1.3/2.3 Mbases) in 239.2s
+[13:52:53 - PWorker] Samples in cache: 65.
+[13:54:52 - PWorker] 82.4% Done (1.9/2.3 Mbases) in 358.1s
+[13:54:52 - PWorker] Samples in cache: 0.
+[13:56:18 - PWorker] 100.0% Done (2.3/2.3 Mbases) in 443.6s
+[13:56:18 - PWorker] All done, 0 remainder regions.
+[13:56:18 - Predict] Finished processing all regions.
++ Running variant calling
+- Running medaka variant
+[13:56:20 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:56:20 - Variants] Processing chr15:23600000-25900000.
+  VCF written to ./chr15/round_1_hap_2.vcf.
++ Merging vcfs to diploid vcf
+- Running medaka haploid2diploid 
+[13:56:36 - VCFMERGE] Merging variants in chrom chr15
+  VCF written to ./chr15/round_1_unfiltered.vcf.
+sed: -I or -i may not be used with stdin
+(medaka) [~/qbb2022-answers/week8-homework $]medaka_variant -i methylation.bam -f hg38.fa -p -r chr20:58800000-58912000 -o ./chr20
+
+++ Preparing data
+- Checking program versions
+Program    Version    Required   Pass     
+bcftools   1.10.2     1.9        True     
+bgzip      1.10.2     1.9        True     
+minimap2   2.24       2.11       True     
+samtools   1.10       1.9        True     
+tabix      1.10.2     1.9        True     
+- Warning: Output ./chr20 already exists, may use old results.
++ Extracting region from bam
+- Extracting regions chr20:58800000-58912000 from bam /Users/cmdb/qbb2022-answers/week8-homework/methylation.bam 
++ Indexing bam
+- Running samtools index on methylation.bam.
+  Bam index in ./chr20/methylation.bam.bai.
+
+++ Running first pass to haplotag reads.
++ Running consensus calling
+- Running medaka consensus with methylation.bam --model r941_prom_snp_g360 
+[13:57:17 - Predict] Processing region(s): chr20:58800000-58912000
+[13:57:17 - Predict] Setting tensorflow threads to 1.
+[13:57:17 - Predict] Processing 1 long region(s) with batching.
+[13:57:17 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_snp_g360_model.hdf5.
+[13:57:17 - ModelLoad] Building model with cudnn optimization: False
+[13:57:18 - DLoader] Initializing data loader
+[13:57:18 - Sampler] Initializing sampler for consensus of region chr20:58800000-58912000.
+[13:57:18 - PWorker] Running inference for 0.1M draft bases.
+[13:57:18 - Feature] Processed chr20:58800000.0-58911999.0 (median depth 91.0)
+[13:57:18 - Sampler] Took 0.22s to make features.
+[13:58:03 - PWorker] 100.0% Done (0.1/0.1 Mbases) in 45.5s
+[13:58:03 - PWorker] All done, 0 remainder regions.
+[13:58:03 - Predict] Finished processing all regions.
++ Running snp calling
+- Running medaka snp
+[13:58:05 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:58:05 - SNPs] Processing chr20:58800000-58912000.
+/Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/labels.py:381: RuntimeWarning: divide by zero encountered in log10
+  q = -10 * np.log10(err)
+  VCF written to ./chr20/round_0_hap_mixed_unphased.vcf.
++ Phasing vcf
++ Indexing fasta
+- Using existing output:  ./chr20//Users/cmdb/qbb2022-answers/week8-homework/hg38.fa.fai.
+- Running whatshap phase for: round_0_hap_mixed_unphased.vcf > round_0_hap_mixed_phased.vcf.
+This is WhatsHap 1.0 running under Python 3.6.13
+Working on 1 samples from 1 family
+======== Working on chromosome 'chr20'
+---- Processing individual SAMPLE
+Using maximum coverage per sample of 15X
+Number of variants skipped due to missing genotypes: 0
+Number of remaining heterozygous variants: 9
+Reading alignments and detecting alleles ...
+Found 174 reads covering 9 variants
+Kept 78 reads that cover at least two variants each
+Reducing coverage to at most 15X by selecting most informative reads ...
+Selected 15 reads covering 8 variants
+Best-case phasing would result in 1 non-singleton phased blocks (1 in total)
+... after read selection: 1 non-singleton phased blocks (1 in total)
+Variants covered by at least one phase-informative read in at least one individual after read selection: 8
+Phasing 1 sample by solving the MEC problem ...
+MEC cost: 60
+No. of phased blocks: 1
+Largest component contains 8 variants (100.0% of accessible variants) between position 58903752 and 58910556
+======== Writing VCF
+Done writing VCF
+
+== SUMMARY ==
+Time spent reading BAM/CRAM:                    0.3 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.0 s
+Time spent phasing:                             0.0 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.0 s
+Total elapsed time:                             0.3 s
+  Phased VCF written to ./chr20/round_0_hap_mixed_phased.vcf.
++ Compressing vcf
+- Compressing round_0_hap_mixed_phased.vcf.
+  Compressed file written to ./chr20/round_0_hap_mixed_phased.vcf.gz.
++ Indexing vcf
+- Indexing round_0_hap_mixed_phased.vcf.gz.
+  Indexed file written to ./chr20/round_0_hap_mixed_phased.vcf.gz.tbi.
++ Tagging reads
+- Running whatshap tag for: round_0_hap_mixed_phased.vcf.gz > round_0_hap_mixed_phased.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments and detecting alleles ...
+Found 89 reads covering 8 variants
+
+== SUMMARY ==
+Total alignments processed:                       648
+Alignments that could be tagged:                   87
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 0.6863579750061035
+  Tagged reads written to ./chr20/round_0_hap_mixed_phased.bam.
++ Indexing bam
+- Running samtools index on round_0_hap_mixed_phased.bam.
+  Bam index in ./chr20/round_0_hap_mixed_phased.bam.bai.
+
+++ Running second pass to produce variant calls.
++ Running consensus calling
+- Running medaka consensus with round_0_hap_mixed_phased.bam --model r941_prom_variant_g360 --tag_name HP --tag_value 1 --tag_keep_missing
+[13:58:09 - Predict] Processing region(s): chr20:58800000-58912000
+[13:58:09 - Predict] Setting tensorflow threads to 1.
+[13:58:09 - Predict] Processing 1 long region(s) with batching.
+[13:58:09 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_variant_g360_model.hdf5.
+[13:58:09 - ModelLoad] Building model with cudnn optimization: False
+[13:58:10 - DLoader] Initializing data loader
+[13:58:10 - Sampler] Initializing sampler for consensus of region chr20:58800000-58912000.
+[13:58:10 - PWorker] Running inference for 0.1M draft bases.
+[13:58:10 - Feature] Processed chr20:58800000.0-58911999.0 (median depth 90.0)
+[13:58:10 - Sampler] Took 0.22s to make features.
+[13:58:55 - PWorker] 100.0% Done (0.1/0.1 Mbases) in 45.0s
+[13:58:55 - PWorker] All done, 0 remainder regions.
+[13:58:55 - Predict] Finished processing all regions.
++ Running variant calling
+- Running medaka variant
+[13:58:56 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:58:56 - Variants] Processing chr20:58800000-58912000.
+  VCF written to ./chr20/round_1_hap_1.vcf.
++ Running consensus calling
+- Running medaka consensus with round_0_hap_mixed_phased.bam --model r941_prom_variant_g360 --tag_name HP --tag_value 2 --tag_keep_missing
+[13:58:59 - Predict] Processing region(s): chr20:58800000-58912000
+[13:58:59 - Predict] Setting tensorflow threads to 1.
+[13:58:59 - Predict] Processing 1 long region(s) with batching.
+[13:58:59 - Predict] Using model: /Users/cmdb/miniconda3/envs/medaka/lib/python3.6/site-packages/medaka/data/r941_prom_variant_g360_model.hdf5.
+[13:58:59 - ModelLoad] Building model with cudnn optimization: False
+[13:59:00 - DLoader] Initializing data loader
+[13:59:00 - Sampler] Initializing sampler for consensus of region chr20:58800000-58912000.
+[13:59:00 - PWorker] Running inference for 0.1M draft bases.
+[13:59:00 - Feature] Processed chr20:58800000.0-58911999.0 (median depth 90.0)
+[13:59:00 - Sampler] Took 0.22s to make features.
+[13:59:45 - PWorker] 100.0% Done (0.1/0.1 Mbases) in 45.2s
+[13:59:45 - PWorker] All done, 0 remainder regions.
+[13:59:45 - Predict] Finished processing all regions.
++ Running variant calling
+- Running medaka variant
+[13:59:46 - DataIndex] Loaded 1/1 (100.00%) sample files.
+[13:59:46 - Variants] Processing chr20:58800000-58912000.
+  VCF written to ./chr20/round_1_hap_2.vcf.
++ Merging vcfs to diploid vcf
+- Running medaka haploid2diploid 
+[13:59:49 - VCFMERGE] Merging variants in chrom chr20
+  VCF written to ./chr20/round_1_unfiltered.vcf.
+sed: -I or -i may not be used with stdin
+(medaka) [~/qbb2022-answers/week8-homework $]ls
+README.md		hg38.fa			methylation.bed.gz.tbi
+chr11			hg38.fa.fai		ont_data.tar.gz
+chr14			methylation.bam		region_genes.bed
+chr15			methylation.bam.bai	regions.bed
+chr20			methylation.bed.gz
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap split --help
+usage: whatshap split [-h] [--output-h1 OUTPUT_H1] [--output-h2 OUTPUT_H2]
+                      [--output-untagged OUTPUT_UNTAGGED] [--add-untagged]
+                      [--only-largest-block] [--discard-unknown-reads]
+                      [--read-lengths-histogram READ_LENGTHS_HISTOGRAM]
+                      READS LIST
+
+Split reads by haplotype.
+
+Reads FASTQ/BAM file and a list of haplotype assignments (such as generated by
+whatshap haplotag --output-haplotag-list). Outputs one FASTQ/BAM per haplotype.
+BAM mode is intended for unmapped BAMs (such as provided by PacBio).
+
+positional arguments:
+  READS                 Input FASTQ/BAM file with reads (FASTQ can be gzipped)
+  LIST                  Tab-separated list with (at least) two columns
+                        <readname> and <haplotype> (can be gzipped).
+                        Currently, the two haplotypes have to be named H1 and
+                        H2 (or none). Alternatively, the output of the
+                        "haplotag" command can be used (4 columns), and this
+                        is required for using the "--only-largest-block"
+                        option (need phaseset and chromosome info).
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output-h1 OUTPUT_H1
+                        Output file to write reads from Haplotype 1 to. Use
+                        ending .gz to create gzipped file.
+  --output-h2 OUTPUT_H2
+                        Output file to write reads from Haplotype 2 to. Use
+                        ending .gz to create gzipped file.
+  --output-untagged OUTPUT_UNTAGGED
+                        Output file to write untagged reads to. Use ending .gz
+                        to create gzipped file.
+  --add-untagged        Add reads without tag to both H1 and H2 output
+                        streams.
+  --only-largest-block  Only consider reads to be tagged if they belong to the
+                        largest phased block (in terms of read count) on their
+                        respective chromosome
+  --discard-unknown-reads
+                        Only check the haplotype of reads listed in the
+                        haplotag list file. Reads (read names) not contained
+                        in this file will be discarded. In the default case (=
+                        keep unknown reads), those reads would be considered
+                        untagged and end up in the respective output file.
+                        Please be sure that the read names match between the
+                        input FASTQ/BAM and the haplotag list file.
+  --read-lengths-histogram READ_LENGTHS_HISTOGRAM
+                        Output file to write read lengths histogram to in tab
+                        separated format.
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag --help
+usage: whatshap haplotag [-h] [-o OUTPUT] [--reference FASTA]
+                         [--regions REGION] [--ignore-linked-read]
+                         [--linked-read-distance-cutoff LINKEDREADDISTANCE]
+                         [--ignore-read-groups] [--sample SAMPLE]
+                         [--output-haplotag-list HAPLOTAG_LIST]
+                         [--tag-supplementary]
+                         VCF ALIGNMENTS
+
+Tag reads by haplotype
+
+Sequencing reads are read from file ALIGNMENTS (in BAM format) and tagged reads
+are written to stdout.
+
+positional arguments:
+  VCF                   VCF file with phased variants (must be gzip-compressed
+                        and indexed)
+  ALIGNMENTS            File (BAM/CRAM) with read alignments to be tagged by
+                        haplotype
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT, --output OUTPUT
+                        Output file. If omitted, use standard output.
+  --reference FASTA, -r FASTA
+                        Reference file. Provide this to detect alleles through
+                        re-alignment. If no index (.fai) exists, it will be
+                        created
+  --regions REGION      Specify region(s) of interest to limit the tagging to
+                        reads/variants overlapping those regions. You can
+                        specify a space-separated list of regions in the form
+                        of chrom:start-end, chrom (consider entire
+                        chromosome), or chrom:start (consider region from this
+                        start to end of chromosome).
+  --ignore-linked-read  Ignore linkage information stored in BX tags of the
+                        reads.
+  --linked-read-distance-cutoff LINKEDREADDISTANCE, -d LINKEDREADDISTANCE
+                        Assume reads with identical BX tags belong to
+                        different read clouds if their distance is larger than
+                        LINKEDREADDISTANCE (default: 50000).
+  --ignore-read-groups  Ignore read groups in BAM/CRAM header and assume all
+                        reads come from the same sample.
+  --sample SAMPLE       Name of a sample to phase. If not given, all samples
+                        in the input VCF are phased. Can be used multiple
+                        times.
+  --output-haplotag-list HAPLOTAG_LIST
+                        Write assignments of read names to haplotypes (tab
+                        separated) to given output file. If filename ends in
+                        .gz, then output is gzipped.
+  --tag-supplementary   Also tag supplementary alignments. Supplementary
+                        alignments are assigned to the same haplotype the
+                        primary alignment has been assigned to (default: only
+                        tag primary alignments).
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr11_hap.bam --reference hg38.fa --regions chr11:1900000:2800000 --output-haplotag-list ./chr11/round_0_hap_mixed_phased.vcf.gz ./methylation.bam
+usage: whatshap haplotag [-h] [-o OUTPUT] [--reference FASTA]
+                         [--regions REGION] [--ignore-linked-read]
+                         [--linked-read-distance-cutoff LINKEDREADDISTANCE]
+                         [--ignore-read-groups] [--sample SAMPLE]
+                         [--output-haplotag-list HAPLOTAG_LIST]
+                         [--tag-supplementary]
+                         VCF ALIGNMENTS
+
+Tag reads by haplotype
+
+Sequencing reads are read from file ALIGNMENTS (in BAM format) and tagged reads
+are written to stdout.
+
+positional arguments:
+  VCF                   VCF file with phased variants (must be gzip-compressed
+                        and indexed)
+  ALIGNMENTS            File (BAM/CRAM) with read alignments to be tagged by
+                        haplotype
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT, --output OUTPUT
+                        Output file. If omitted, use standard output.
+  --reference FASTA, -r FASTA
+                        Reference file. Provide this to detect alleles through
+                        re-alignment. If no index (.fai) exists, it will be
+                        created
+  --regions REGION      Specify region(s) of interest to limit the tagging to
+                        reads/variants overlapping those regions. You can
+                        specify a space-separated list of regions in the form
+                        of chrom:start-end, chrom (consider entire
+                        chromosome), or chrom:start (consider region from this
+                        start to end of chromosome).
+  --ignore-linked-read  Ignore linkage information stored in BX tags of the
+                        reads.
+  --linked-read-distance-cutoff LINKEDREADDISTANCE, -d LINKEDREADDISTANCE
+                        Assume reads with identical BX tags belong to
+                        different read clouds if their distance is larger than
+                        LINKEDREADDISTANCE (default: 50000).
+  --ignore-read-groups  Ignore read groups in BAM/CRAM header and assume all
+                        reads come from the same sample.
+  --sample SAMPLE       Name of a sample to phase. If not given, all samples
+                        in the input VCF are phased. Can be used multiple
+                        times.
+  --output-haplotag-list HAPLOTAG_LIST
+                        Write assignments of read names to haplotypes (tab
+                        separated) to given output file. If filename ends in
+                        .gz, then output is gzipped.
+  --tag-supplementary   Also tag supplementary alignments. Supplementary
+                        alignments are assigned to the same haplotype the
+                        primary alignment has been assigned to (default: only
+                        tag primary alignments).
+whatshap haplotag: error: the following arguments are required: ALIGNMENTS
+(medaka) [~/qbb2022-answers/week8-homework $]ls
+README.md		hg38.fa			methylation.bed.gz.tbi
+chr11			hg38.fa.fai		ont_data.tar.gz
+chr14			methylation.bam		region_genes.bed
+chr15			methylation.bam.bai	regions.bed
+chr20			methylation.bed.gz
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr11_hap.bam --reference hg38.fa --regions chr11:1900000:2800000 --output-haplotag-list ./chr11/round_0_hap_mixed_phased.vcf.gz methylation.bam
+usage: whatshap haplotag [-h] [-o OUTPUT] [--reference FASTA]
+                         [--regions REGION] [--ignore-linked-read]
+                         [--linked-read-distance-cutoff LINKEDREADDISTANCE]
+                         [--ignore-read-groups] [--sample SAMPLE]
+                         [--output-haplotag-list HAPLOTAG_LIST]
+                         [--tag-supplementary]
+                         VCF ALIGNMENTS
+
+Tag reads by haplotype
+
+Sequencing reads are read from file ALIGNMENTS (in BAM format) and tagged reads
+are written to stdout.
+
+positional arguments:
+  VCF                   VCF file with phased variants (must be gzip-compressed
+                        and indexed)
+  ALIGNMENTS            File (BAM/CRAM) with read alignments to be tagged by
+                        haplotype
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT, --output OUTPUT
+                        Output file. If omitted, use standard output.
+  --reference FASTA, -r FASTA
+                        Reference file. Provide this to detect alleles through
+                        re-alignment. If no index (.fai) exists, it will be
+                        created
+  --regions REGION      Specify region(s) of interest to limit the tagging to
+                        reads/variants overlapping those regions. You can
+                        specify a space-separated list of regions in the form
+                        of chrom:start-end, chrom (consider entire
+                        chromosome), or chrom:start (consider region from this
+                        start to end of chromosome).
+  --ignore-linked-read  Ignore linkage information stored in BX tags of the
+                        reads.
+  --linked-read-distance-cutoff LINKEDREADDISTANCE, -d LINKEDREADDISTANCE
+                        Assume reads with identical BX tags belong to
+                        different read clouds if their distance is larger than
+                        LINKEDREADDISTANCE (default: 50000).
+  --ignore-read-groups  Ignore read groups in BAM/CRAM header and assume all
+                        reads come from the same sample.
+  --sample SAMPLE       Name of a sample to phase. If not given, all samples
+                        in the input VCF are phased. Can be used multiple
+                        times.
+  --output-haplotag-list HAPLOTAG_LIST
+                        Write assignments of read names to haplotypes (tab
+                        separated) to given output file. If filename ends in
+                        .gz, then output is gzipped.
+  --tag-supplementary   Also tag supplementary alignments. Supplementary
+                        alignments are assigned to the same haplotype the
+                        primary alignment has been assigned to (default: only
+                        tag primary alignments).
+whatshap haplotag: error: the following arguments are required: ALIGNMENTS
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr11_hap.bam --reference hg38.fa --regions chr11:1900000:2800000 --output-haplotag-list chr11_haplist.vcf.gz ./chr11/round_0_hap_mixed_phased.vcf.gz methylation.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments for sample 'SAMPLE' and detecting alleles ...
+Found 3365 reads covering 905 variants
+
+== SUMMARY ==
+Total alignments processed:                      4063
+Alignments that could be tagged:                 3323
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 4.604497909545898
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr14_hap.bam --reference hg38.fa --regions chr14:100700000:100990000 --output-haplotag-list chr14_haplist.vcf.gz ./chr14/round_0_hap_mixed_phased.vcf.gz methylation.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments for sample 'SAMPLE' and detecting alleles ...
+Found 1314 reads covering 282 variants
+
+== SUMMARY ==
+Total alignments processed:                      1439
+Alignments that could be tagged:                 1303
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 1.706974983215332
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr15_hap.bam --reference hg38.fa --regions chr15:23600000:25900000 --output-haplotag-list chr15_haplist.vcf.gz ./chr15/round_0_hap_mixed_phased.vcf.gz methylation.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments for sample 'SAMPLE' and detecting alleles ...
+Found 8115 reads covering 2539 variants
+
+== SUMMARY ==
+Total alignments processed:                     10395
+Alignments that could be tagged:                 8000
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 10.331945896148682
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr11_hap.bam --reference hg38.fa --regions chr11:1900000:2800000 --output-haplotag-list chr11_haplist.tsv ./chr11/round_0_hap_mixed_phased.vcf.gz methylation.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments for sample 'SAMPLE' and detecting alleles ...
+Found 3365 reads covering 905 variants
+
+== SUMMARY ==
+Total alignments processed:                      4063
+Alignments that could be tagged:                 3323
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 4.580481767654419
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr14_hap.bam --reference hg38.fa --regions chr14:100700000:100990000 --output-haplotag-list chr14_haplist.tsv ./chr14/round_0_hap_mixed_phased.vcf.gz methylation.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments for sample 'SAMPLE' and detecting alleles ...
+Found 1314 reads covering 282 variants
+
+== SUMMARY ==
+Total alignments processed:                      1439
+Alignments that could be tagged:                 1303
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 1.690072774887085
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr15_hap.bam --reference hg38.fa --regions chr15:23600000:25900000 --output-haplotag-list chr15_haplist.tsv ./chr15/round_0_hap_mixed_phased.vcf.gz methylation.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments for sample 'SAMPLE' and detecting alleles ...
+Found 8115 reads covering 2539 variants
+
+== SUMMARY ==
+Total alignments processed:                     10395
+Alignments that could be tagged:                 8000
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 10.359941720962524
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap haplotag -o chr20_hap.bam --reference hg38.fa --regions chr20:58800000:58912000 --output-haplotag-list chr20_haplist.tsv ./chr20/round_0_hap_mixed_phased.vcf.gz methylation.bam
+Found 1 samples in input VCF
+Keeping 1 samples for haplo-tagging
+Found 1 samples in BAM file
+Reading alignments for sample 'SAMPLE' and detecting alleles ...
+Found 89 reads covering 8 variants
+
+== SUMMARY ==
+Total alignments processed:                       648
+Alignments that could be tagged:                   87
+Alignments spanning multiple phase sets:            0
+haplotag - total processing time: 0.6697578430175781
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap split --output-h1 chr11_h1.bam --output-h2 chr11_h2.bam chr11_hap.bam chr11_haplist.tsv
+Total number of reads in haplotag list: 4063
+Total number of haplo-tagged reads: 3323
+Total number of untagged reads: 740
+[E::idx_find_and_load] Could not retrieve index file for 'chr11_hap.bam'
+
+== SUMMARY ==
+Total reads processed: 4063
+Number of output reads "untagged": 0
+Number of output reads haplotype 1: 1625
+Number of output reads haplotype 2: 1698
+Number of unknown (dropped) reads: 0
+Number of skipped reads (per user request): 740
+Time for processing haplotag list: 0.003 sec
+Time for total initial setup: 0.005 sec
+Time for iterating input reads: 2.254 sec
+Total run time: 2.262 sec
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap split --output-h1 chr14_h1.bam --output-h2 chr14_h2.bam chr14_hap.bam chr14_haplist.tsv
+Total number of reads in haplotag list: 1439
+Total number of haplo-tagged reads: 1303
+Total number of untagged reads: 136
+[E::idx_find_and_load] Could not retrieve index file for 'chr14_hap.bam'
+
+== SUMMARY ==
+Total reads processed: 1439
+Number of output reads "untagged": 0
+Number of output reads haplotype 1: 638
+Number of output reads haplotype 2: 665
+Number of unknown (dropped) reads: 0
+Number of skipped reads (per user request): 136
+Time for processing haplotag list: 0.001 sec
+Time for total initial setup: 0.003 sec
+Time for iterating input reads: 0.838 sec
+Total run time: 0.844 sec
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap split --output-h1 chr15_h1.bam --output-h2 chr15_h2.bam chr15_hap.bam chr15_haplist.tsv
+Total number of reads in haplotag list: 10395
+Total number of haplo-tagged reads: 8000
+Total number of untagged reads: 2395
+[E::idx_find_and_load] Could not retrieve index file for 'chr15_hap.bam'
+
+== SUMMARY ==
+Total reads processed: 10395
+Number of output reads "untagged": 0
+Number of output reads haplotype 1: 3996
+Number of output reads haplotype 2: 4004
+Number of unknown (dropped) reads: 0
+Number of skipped reads (per user request): 2395
+Time for processing haplotag list: 0.007 sec
+Time for total initial setup: 0.009 sec
+Time for iterating input reads: 5.324 sec
+Total run time: 5.339 sec
+(medaka) [~/qbb2022-answers/week8-homework $]whatshap split --output-h1 chr20_h1.bam --output-h2 chr20_h2.bam chr20_hap.bam chr20_haplist.tsv
+Total number of reads in haplotag list: 648
+Total number of haplo-tagged reads: 87
+Total number of untagged reads: 561
+[E::idx_find_and_load] Could not retrieve index file for 'chr20_hap.bam'
+
+== SUMMARY ==
+Total reads processed: 648
+Number of output reads "untagged": 0
+Number of output reads haplotype 1: 43
+Number of output reads haplotype 2: 44
+Number of unknown (dropped) reads: 0
+Number of skipped reads (per user request): 561
+Time for processing haplotag list: 0.001 sec
+Time for total initial setup: 0.002 sec
+Time for iterating input reads: 0.133 sec
+Total run time: 0.138 sec
+(medaka) [~/qbb2022-answers/week8-homework $]samtools --help
+
+Program: samtools (Tools for alignments in the SAM format)
+Version: 1.10 (using htslib 1.10.2)
+
+Usage:   samtools <command> [options]
+
+Commands:
+  -- Indexing
+     dict           create a sequence dictionary file
+     faidx          index/extract FASTA
+     fqidx          index/extract FASTQ
+     index          index alignment
+
+  -- Editing
+     calmd          recalculate MD/NM tags and '=' bases
+     fixmate        fix mate information
+     reheader       replace BAM header
+     targetcut      cut fosmid regions (for fosmid pool only)
+     addreplacerg   adds or replaces RG tags
+     markdup        mark duplicates
+
+  -- File operations
+     collate        shuffle and group alignments by name
+     cat            concatenate BAMs
+     merge          merge sorted alignments
+     mpileup        multi-way pileup
+     sort           sort alignment file
+     split          splits a file by read group
+     quickcheck     quickly check if SAM/BAM/CRAM file appears intact
+     fastq          converts a BAM to a FASTQ
+     fasta          converts a BAM to a FASTA
+
+  -- Statistics
+     bedcov         read depth per BED region
+     coverage       alignment depth and percent coverage
+     depth          compute the depth
+     flagstat       simple stats
+     idxstats       BAM index stats
+     phase          phase heterozygotes
+     stats          generate stats (former bamcheck)
+
+  -- Viewing
+     flags          explain BAM flags
+     tview          text alignment viewer
+     view           SAM<->BAM<->CRAM conversion
+     depad          convert padded BAM to unpadded BAM
+
+(medaka) [~/qbb2022-answers/week8-homework $]samtools cat --help
+samtools: unrecognized option `--help'
+Segmentation fault: 11
+(medaka) [~/qbb2022-answers/week8-homework $]samtools cat -o h2_cat.bam chr11_h2.bam chr14_h2.bam chr15_h2.bam chr20_h2.bam
+(medaka) [~/qbb2022-answers/week8-homework $]ls
+README.md		chr15			hg38.fa
+chr11			chr15_h1.bam		hg38.fa.fai
+chr11_h1.bam		chr15_h2.bam		methylation.bam
+chr11_h2.bam		chr15_hap.bam		methylation.bam.bai
+chr11_hap.bam		chr15_haplist.tsv	methylation.bed.gz
+chr11_haplist.tsv	chr20			methylation.bed.gz.tbi
+chr14			chr20_h1.bam		ont_data.tar.gz
+chr14_h1.bam		chr20_h2.bam		region_genes.bed
+chr14_h2.bam		chr20_hap.bam		regions.bed
+chr14_hap.bam		chr20_haplist.tsv
+chr14_haplist.tsv	h2_cat.bam
+(medaka) [~/qbb2022-answers/week8-homework $]samtools cat -o h1_cat.bam chr11_h1.bam chr14_h1.bam chr15_h1.bam chr20_h1.bam
+(medaka) [~/qbb2022-answers/week8-homework $]conda deactivate
+(base) [~/qbb2022-answers/week8-homework $]conda create -n igv gradle openjdk=11 -y
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /Users/cmdb/miniconda3/envs/igv
+
+  added / updated specs:
+    - gradle
+    - openjdk=11
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    gradle-7.4.2               |       h5eb16cf_0       110.4 MB  conda-forge
+    ------------------------------------------------------------
+                                           Total:       110.4 MB
+
+The following NEW packages will be INSTALLED:
+
+  gradle             conda-forge/osx-64::gradle-7.4.2-h5eb16cf_0
+  libcxx             anaconda/osx-64::libcxx-12.0.0-h2f01273_0
+  openjdk            anaconda/osx-64::openjdk-11.0.13-h8346a28_0
+
+
+
+Downloading and Extracting Packages
+gradle-7.4.2         | 110.4 MB  | ##################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#     $ conda activate igv
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+(base) [~/qbb2022-answers/week8-homework $]conda activate igv
+(igv) [~/qbb2022-answers/week8-homework $]git clone https://github.com/igvteam/igv.git
+Cloning into 'igv'...
+remote: Enumerating objects: 92057, done.
+remote: Counting objects: 100% (6610/6610), done.
+remote: Compressing objects: 100% (2662/2662), done.
+remote: Total 92057 (delta 3752), reused 6215 (delta 3480), pack-reused 85447
+Receiving objects: 100% (92057/92057), 415.63 MiB | 28.41 MiB/s, done.
+Resolving deltas: 100% (58690/58690), done.
+(igv) [~/qbb2022-answers/week8-homework $]ls
+README.md		chr15			h2_cat.bam
+chr11			chr15_h1.bam		hg38.fa
+chr11_h1.bam		chr15_h2.bam		hg38.fa.fai
+chr11_h2.bam		chr15_hap.bam		igv
+chr11_hap.bam		chr15_haplist.tsv	methylation.bam
+chr11_haplist.tsv	chr20			methylation.bam.bai
+chr14			chr20_h1.bam		methylation.bed.gz
+chr14_h1.bam		chr20_h2.bam		methylation.bed.gz.tbi
+chr14_h2.bam		chr20_hap.bam		ont_data.tar.gz
+chr14_hap.bam		chr20_haplist.tsv	region_genes.bed
+chr14_haplist.tsv	h1_cat.bam		regions.bed
+(igv) [~/qbb2022-answers/week8-homework $]cd igv
+(igv) [~/qbb2022-answers/week8-homework/igv $]./gradlew createDist
+Downloading https://services.gradle.org/distributions/gradle-5.5.1-all.zip
+..................................................................................................................................
+
+Welcome to Gradle 5.5.1!
+
+Here are the highlights of this release:
+ - Kickstart Gradle plugin development with gradle init
+ - Distribute organization-wide Gradle properties in custom Gradle distributions
+ - Transform dependency artifacts on resolution
+
+For more details see https://docs.gradle.org/5.5.1/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+> Task :compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+BUILD SUCCESSFUL in 44s
+4 actionable tasks: 4 executed
+(igv) [~/qbb2022-answers/week8-homework/igv $]cd ../
+(igv) [~/qbb2022-answers/week8-homework $]ln -s ${PWD}/igv/build/IGV-dist/igv.sh ./
+(igv) [~/qbb2022-answers/week8-homework $]ls
+README.md		chr15_h1.bam		hg38.fa.fai
+chr11			chr15_h2.bam		igv
+chr11_h1.bam		chr15_hap.bam		igv.sh
+chr11_h2.bam		chr15_haplist.tsv	methylation.bam
+chr11_hap.bam		chr20			methylation.bam.bai
+chr11_haplist.tsv	chr20_h1.bam		methylation.bed.gz
+chr14			chr20_h2.bam		methylation.bed.gz.tbi
+chr14_h1.bam		chr20_hap.bam		ont_data.tar.gz
+chr14_h2.bam		chr20_haplist.tsv	region_genes.bed
+chr14_hap.bam		h1_cat.bam		regions.bed
+chr14_haplist.tsv	h2_cat.bam
+chr15			hg38.fa
+(igv) [~/qbb2022-answers/week8-homework $]./igv.sh
+Using system JDK.
+WARNING: package com.sun.java.swing.plaf.windows not in java.desktop
+WARNING: package sun.awt.windows not in java.desktop
+openjdk version "11.0.13" 2021-10-19
+OpenJDK Runtime Environment JBR-11.0.13.7-1751.21-jcef (build 11.0.13+7-b1751.21)
+OpenJDK 64-Bit Server VM JBR-11.0.13.7-1751.21-jcef (build 11.0.13+7-b1751.21, mixed mode)
+INFO [Nov 03,2022 14:51] [Main] Startup  IGV Version user not_set
+INFO [Nov 03,2022 14:51] [Main] Java 11.0.13 (build 11.0.13+7-b1751.21) 2021-10-19
+INFO [Nov 03,2022 14:51] [Main] Java Vendor: JetBrains s.r.o. https://openjdk.java.net/
+INFO [Nov 03,2022 14:51] [Main] JVM: OpenJDK 64-Bit Server VM JBR-11.0.13.7-1751.21-jcef   
+INFO [Nov 03,2022 14:51] [Main] OS: Mac OS X 13.0 x86_64
+INFO [Nov 03,2022 14:51] [Main] IGV Directory: /Users/cmdb/igv
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Warning: the fonts "Times" and "Times" are not available for the Java logical font "Serif", which may have unexpected appearance or behavior. Re-enable the "Times" font to remove this warning.
+INFO [Nov 03,2022 14:51] [CommandListener] Listening on port 60151
+INFO [Nov 03,2022 14:51] [GenomeManager] Loading genome: /Users/cmdb/qbb2022-answers/week3-homework/livecoding/c_elegans.PRJNA13758.WS283.genomic.fa
+2022-11-03 14:51:22.500 java[22282:357866] +[CATransaction synchronize] called within transaction
+INFO [Nov 03,2022 14:51] [TrackLoader] Loading resource:  /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam
+SEVERE [Nov 03,2022 14:51] [AlignmentReaderFactory] An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.bai<br>Index file not found.  Tried <br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bai<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.csi<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.csi
+SEVERE [Nov 03,2022 14:51] [AlignmentReaderFactory] org.broad.igv.exceptions.DataLoadException: An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.bai<br>Index file not found.  Tried <br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bai<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.csi<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.csi
+	at org.igv/org.broad.igv.sam.reader.SamReaderPool.getIndexPath(SamReaderPool.java:300)
+	at org.igv/org.broad.igv.sam.reader.SamReaderPool.createReader(SamReaderPool.java:123)
+	at org.igv/org.broad.igv.sam.reader.SamReaderPool.createReader(SamReaderPool.java:80)
+	at org.igv/org.broad.igv.sam.reader.SamReaderPool.getReader(SamReaderPool.java:60)
+	at org.igv/org.broad.igv.sam.reader.BAMReader.<init>(BAMReader.java:65)
+	at org.igv/org.broad.igv.sam.reader.AlignmentReaderFactory.getReader(AlignmentReaderFactory.java:85)
+	at org.igv/org.broad.igv.sam.reader.AlignmentReaderFactory.getReader(AlignmentReaderFactory.java:57)
+	at org.igv/org.broad.igv.sam.AlignmentDataManager.<init>(AlignmentDataManager.java:78)
+	at org.igv/org.broad.igv.track.TrackLoader.loadAlignmentsTrack(TrackLoader.java:910)
+	at org.igv/org.broad.igv.track.TrackLoader.load(TrackLoader.java:161)
+	at org.igv/org.broad.igv.ui.IGV.load(IGV.java:1249)
+	at org.igv/org.broad.igv.ui.IGV.loadResources(IGV.java:1179)
+	at org.igv/org.broad.igv.ui.IGV$2.run(IGV.java:409)
+	at org.igv/org.broad.igv.util.LongRunningTask.call(LongRunningTask.java:72)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+SEVERE [Nov 03,2022 14:51] [TrackLoader] An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam<br>Error loading BAM file: org.broad.igv.exceptions.DataLoadException: An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.bai<br>Index file not found.  Tried <br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bai<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.csi<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.csi
+SEVERE [Nov 03,2022 14:51] [TrackLoader] org.broad.igv.exceptions.DataLoadException: An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam<br>Error loading BAM file: org.broad.igv.exceptions.DataLoadException: An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.bai<br>Index file not found.  Tried <br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bai<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.csi<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.csi
+	at org.igv/org.broad.igv.sam.reader.AlignmentReaderFactory.getReader(AlignmentReaderFactory.java:88)
+	at org.igv/org.broad.igv.sam.reader.AlignmentReaderFactory.getReader(AlignmentReaderFactory.java:57)
+	at org.igv/org.broad.igv.sam.AlignmentDataManager.<init>(AlignmentDataManager.java:78)
+	at org.igv/org.broad.igv.track.TrackLoader.loadAlignmentsTrack(TrackLoader.java:910)
+	at org.igv/org.broad.igv.track.TrackLoader.load(TrackLoader.java:161)
+	at org.igv/org.broad.igv.ui.IGV.load(IGV.java:1249)
+	at org.igv/org.broad.igv.ui.IGV.loadResources(IGV.java:1179)
+	at org.igv/org.broad.igv.ui.IGV$2.run(IGV.java:409)
+	at org.igv/org.broad.igv.util.LongRunningTask.call(LongRunningTask.java:72)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+SEVERE [Nov 03,2022 14:51] [IGV] Error loading track
+SEVERE [Nov 03,2022 14:51] [IGV] org.broad.igv.exceptions.DataLoadException: An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam<br>Error loading BAM file: org.broad.igv.exceptions.DataLoadException: An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.bai<br>Index file not found.  Tried <br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bai<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.csi<br>/Users/cmdb/qbb2022-answers/week8-homework/h1_cat.csi
+	at org.igv/org.broad.igv.track.TrackLoader.load(TrackLoader.java:272)
+	at org.igv/org.broad.igv.ui.IGV.load(IGV.java:1249)
+	at org.igv/org.broad.igv.ui.IGV.loadResources(IGV.java:1179)
+	at org.igv/org.broad.igv.ui.IGV$2.run(IGV.java:409)
+	at org.igv/org.broad.igv.util.LongRunningTask.call(LongRunningTask.java:72)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+INFO [Nov 03,2022 14:52] [ShutdownThread] Shutting down
+(igv) [~/qbb2022-answers/week8-homework $]conda deactivate
+(base) [~/qbb2022-answers/week8-homework $]conda activate medaka
+(medaka) [~/qbb2022-answers/week8-homework $]samtools index h1_cat.bam
+(medaka) [~/qbb2022-answers/week8-homework $]ls
+README.md		chr15_h1.bam		hg38.fa
+chr11			chr15_h2.bam		hg38.fa.fai
+chr11_h1.bam		chr15_hap.bam		igv
+chr11_h2.bam		chr15_haplist.tsv	igv.sh
+chr11_hap.bam		chr20			methylation.bam
+chr11_haplist.tsv	chr20_h1.bam		methylation.bam.bai
+chr14			chr20_h2.bam		methylation.bed.gz
+chr14_h1.bam		chr20_hap.bam		methylation.bed.gz.tbi
+chr14_h2.bam		chr20_haplist.tsv	ont_data.tar.gz
+chr14_hap.bam		h1_cat.bam		region_genes.bed
+chr14_haplist.tsv	h1_cat.bam.bai		regions.bed
+chr15			h2_cat.bam
+(medaka) [~/qbb2022-answers/week8-homework $]samtools index h2_cat.bam
+(medaka) [~/qbb2022-answers/week8-homework $]conda deactivate
+(base) [~/qbb2022-answers/week8-homework $]conda activate igv
+(igv) [~/qbb2022-answers/week8-homework $]./
+chr11/  chr14/  chr15/  chr20/  igv/    igv.sh@ 
+(igv) [~/qbb2022-answers/week8-homework $]./i
+igv/    igv.sh@ 
+(igv) [~/qbb2022-answers/week8-homework $]./igv.sh
+Using system JDK.
+WARNING: package com.sun.java.swing.plaf.windows not in java.desktop
+WARNING: package sun.awt.windows not in java.desktop
+openjdk version "11.0.13" 2021-10-19
+OpenJDK Runtime Environment JBR-11.0.13.7-1751.21-jcef (build 11.0.13+7-b1751.21)
+OpenJDK 64-Bit Server VM JBR-11.0.13.7-1751.21-jcef (build 11.0.13+7-b1751.21, mixed mode)
+INFO [Nov 03,2022 14:57] [Main] Startup  IGV Version user not_set
+INFO [Nov 03,2022 14:57] [Main] Java 11.0.13 (build 11.0.13+7-b1751.21) 2021-10-19
+INFO [Nov 03,2022 14:57] [Main] Java Vendor: JetBrains s.r.o. https://openjdk.java.net/
+INFO [Nov 03,2022 14:57] [Main] JVM: OpenJDK 64-Bit Server VM JBR-11.0.13.7-1751.21-jcef   
+INFO [Nov 03,2022 14:57] [Main] OS: Mac OS X 13.0 x86_64
+INFO [Nov 03,2022 14:57] [Main] IGV Directory: /Users/cmdb/igv
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Warning: the fonts "Times" and "Times" are not available for the Java logical font "Serif", which may have unexpected appearance or behavior. Re-enable the "Times" font to remove this warning.
+INFO [Nov 03,2022 14:57] [CommandListener] Listening on port 60151
+INFO [Nov 03,2022 14:57] [GenomeManager] Loading genome: /Users/cmdb/qbb2022-answers/week3-homework/livecoding/c_elegans.PRJNA13758.WS283.genomic.fa
+2022-11-03 14:57:20.054 java[22362:360692] +[CATransaction synchronize] called within transaction
+INFO [Nov 03,2022 14:57] [TrackLoader] Loading resource:  /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam
+INFO [Nov 03,2022 14:58] [GenomeManager] Loading genome: https://s3.amazonaws.com/igv.org.genomes/hg18/hg18.json
+INFO [Nov 03,2022 14:58] [TrackLoader] Loading resource:  https://s3.amazonaws.com/igv.org.genomes/hg18/refGene.txt.gz
+2022-11-03 14:58:47.489 java[22362:360692] +[CATransaction synchronize] called within transaction
+INFO [Nov 03,2022 14:59] [GenomeManager] Loading genome: /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam
+INFO [Nov 03,2022 14:59] [FastaUtils] Creating index file at /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.fai
+SEVERE [Nov 03,2022 14:59] [MessageUtils] Could not create index file: /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.fai
+SEVERE [Nov 03,2022 14:59] [MessageUtils] org.broad.igv.exceptions.DataLoadException: An error occurred while accessing:    /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam<br>Blank line at line number 217, followed by data line at 218, in contig null
+Blank lines are only allowed at the end of a contig
+	at org.igv/org.broad.igv.feature.genome.fasta.FastaUtils.createIndexFile(FastaUtils.java:144)
+	at org.igv/org.broad.igv.feature.genome.load.FastaGenomeLoader.loadGenome(FastaGenomeLoader.java:43)
+	at org.igv/org.broad.igv.feature.genome.GenomeManager.loadGenome(GenomeManager.java:197)
+	at org.igv/org.broad.igv.ui.IGVMenuBar$6.actionPerformed(IGVMenuBar.java:420)
+	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1967)
+	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2308)
+	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405)
+	at java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)
+	at java.desktop/javax.swing.AbstractButton.doClick(AbstractButton.java:369)
+	at java.desktop/com.apple.laf.ScreenMenuItem.actionPerformed(ScreenMenuItem.java:146)
+	at java.desktop/java.awt.MenuItem.processActionEvent(MenuItem.java:690)
+	at java.desktop/java.awt.MenuItem.processEvent(MenuItem.java:649)
+	at java.desktop/java.awt.MenuComponent.dispatchEventImpl(MenuComponent.java:375)
+	at java.desktop/java.awt.MenuComponent.dispatchEvent(MenuComponent.java:363)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:781)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:727)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:95)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:751)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:749)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:748)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+
+SEVERE [Nov 03,2022 14:59] [MessageUtils] Could not create index file: /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam.fai
+2022-11-03 14:59:43.776 java[22362:360692] +[CATransaction synchronize] called within transaction
+INFO [Nov 03,2022 14:59] [TrackLoader] Loading resource:  /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam
+INFO [Nov 03,2022 15:01] [GenomeManager] Loading genome: https://s3.amazonaws.com/igv.org.genomes/hg18/hg18.json
+INFO [Nov 03,2022 15:01] [TrackLoader] Loading resource:  https://s3.amazonaws.com/igv.org.genomes/hg18/refGene.txt.gz
+2022-11-03 15:01:19.634 java[22362:360692] +[CATransaction synchronize] called within transaction
+INFO [Nov 03,2022 15:01] [TrackLoader] Loading resource:  /Users/cmdb/qbb2022-answers/week8-homework/h1_cat.bam
+WARNING [Nov 03,2022 15:04] [IGVPreferences] No default value for: SAM.INVERT_SORT
+WARNING [Nov 03,2022 15:05] [IGVPreferences] No default value for: SAM.INVERT_SORT
+2022-11-03 15:06:56.690 java[22362:360692] +[CATransaction synchronize] called within transaction
+INFO [Nov 03,2022 15:07] [TrackLoader] Loading resource:  /Users/cmdb/qbb2022-answers/week8-homework/h2_cat.bam
+WARNING [Nov 03,2022 15:07] [IGVPreferences] No default value for: SAM.INVERT_SORT
+2022-11-04 09:33:52.988 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:03.941 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:30.382 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:32.738 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:32.870 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:32.986 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:33.103 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:33.237 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:33.353 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:33.453 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:33.585 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:33.704 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:33.937 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:34.072 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:34.354 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:34.457 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:34.570 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:34.787 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:34.905 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:34:34.937 java[22362:360692] Warning: Window move completed without beginning
+2022-11-04 09:36:25.430 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:37:47.995 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:39:51.052 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:40:19.443 java[22362:360692] +[CATransaction synchronize] called within transaction
+2022-11-04 09:40:46.888 java[22362:360692] +[CATransaction synchronize] called within transaction
+INFO [Nov 04,2022 09:46] [ShutdownThread] Shutting down
+(igv) [~/qbb2022-answers/week8-homework $]ls
+README.md		chr15_h1.bam		h2_cat.bam
+chr11			chr15_h2.bam		h2_cat.bam.bai
+chr11_h1.bam		chr15_hap.bam		hg38.fa
+chr11_h2.bam		chr15_haplist.tsv	hg38.fa.fai
+chr11_hap.bam		chr15_snapshot.png	igv
+chr11_haplist.tsv	chr20			igv.sh
+chr11_snapshot.png	chr20_h1.bam		methylation.bam
+chr14			chr20_h2.bam		methylation.bam.bai
+chr14_h1.bam		chr20_hap.bam		methylation.bed.gz
+chr14_h2.bam		chr20_haplist.tsv	methylation.bed.gz.tbi
+chr14_hap.bam		chr20_snapshot.png	ont_data.tar.gz
+chr14_haplist.tsv	h1_cat.bam		region_genes.bed
+chr14_snapshot.png	h1_cat.bam.bai		regions.bed
+chr15			h1_cat.bam.fai
+(igv) [~/qbb2022-answers/week8-homework $]git add chr11
+chr11/              chr11_h2.bam        chr11_haplist.tsv
+chr11_h1.bam        chr11_hap.bam       chr11_snapshot.png
+(igv) [~/qbb2022-answers/week8-homework $]git add chr11
+chr11/              chr11_h2.bam        chr11_haplist.tsv
+chr11_h1.bam        chr11_hap.bam       chr11_snapshot.png
+(igv) [~/qbb2022-answers/week8-homework $]git add chr11_snapshot.png 
+(igv) [~/qbb2022-answers/week8-homework $]git add chr14_
+chr14_h1.bam        chr14_hap.bam       chr14_snapshot.png
+chr14_h2.bam        chr14_haplist.tsv   
+(igv) [~/qbb2022-answers/week8-homework $]git add chr14_snapshot.png 
+(igv) [~/qbb2022-answers/week8-homework $]git add chr15
+chr15/              chr15_h2.bam        chr15_haplist.tsv
+chr15_h1.bam        chr15_hap.bam       chr15_snapshot.png
+(igv) [~/qbb2022-answers/week8-homework $]git add chr15_snapshot.png 
+(igv) [~/qbb2022-answers/week8-homework $]git add chr20_
+chr20_h1.bam        chr20_hap.bam       chr20_snapshot.png
+chr20_h2.bam        chr20_haplist.tsv   
+(igv) [~/qbb2022-answers/week8-homework $]git add chr20_snapshot.png 
+(igv) [~/qbb2022-answers/week8-homework $]git add 
