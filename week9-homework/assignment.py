@@ -191,12 +191,17 @@ percent_overlap = len(overlap)/transcript_subset[boolean].shape[0]
 # print(percent_overlap)
 ## 0.9099540581929556
 
+with open('percent_overlap.txt', 'w', encoding='utf-8') as f:
+    f.write(str(percent_overlap))
+
 ## volcano plot of the differential expression (with sex as a covariate) results. Use the betas on the x axis and -log10(p-value) on the y-axis. Color the significant points in a different color.
 
 y = -np.log(pvalue_list_sex)
 x = slope_list_sex
 
 color = ["Orange" if x == True else "Black" for x in boolean_sex]
+## masking list
+## or you can do for loop
 
 fig,ax = plt.subplots()
 ax.scatter(x,y, c = color, s=0.25, alpha=1)
@@ -205,7 +210,7 @@ ax.set_xlabel("Slope")
 ax.set_ylabel("-Log10 (p-values)")
 
 plt.savefig("volcano_plot.png")
-plt.show()
+# plt.show()
 
 
 
