@@ -136,7 +136,7 @@ ax[0].imshow(empty1, cmap = "magma_r", vmax = 4)
 ax[1].imshow(empty2, cmap = "magma_r", vmax = 4)
 ax[2].imshow(empty3, cmap = "seismic", norm = colors.CenteredNorm())
 
-sfig.tight_layout(pad=1.0)
+fig.tight_layout(pad=1.0)
 plt.savefig("three_plots_subsampled.png")
 plt.show()
 

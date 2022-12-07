@@ -68,15 +68,25 @@ empty40kb[data_40kb_filtered['F2'], data_40kb_filtered['F1']] = data_40kb_filter
 print(empty40kb)
 # print(54951+1-54878) ## 74
 
-insulation = numpy.zeros((69,))
-for i in range(2, len(empty40kb)-3):
-    for j in range(2, len(empty40kb)-3):
-        if i==j:
-            insulation[i-2] = numpy.mean(empty40kb[(i - 2):(i + 2), (j - 2):(j + 2)])
-print(insulation)
-x = numpy.arange(0, 69, 1)
+print(len(empty40kb))
+
+insulation = numpy.zeros((len(empty40kb),))
+for i in range(2, len(empty40kb)-2):
+    insulation[i] = numpy.mean(empty40kb[(i - 2):(i + 2), (i - 2):(i + 2)])
+    # for j in range(2, len(empty40kb)-3):
+    #     if i==j:
+    #         insulation[i-2] = numpy.mean(empty40kb[(i - 2):(i + 2), (j - 2):(j + 2)])
+# print(insulation)
+insulation[0] = numpy.nan
+insulation[1] = numpy.nan
+insulation[-1] = numpy.nan
+insulation[-2] = numpy.nan
+insulation[-3] = numpy.nan
+x = numpy.arange(0, len(empty40kb), 1)
 print(x)
 y = insulation
+
+print(13400000-10400000)
 
 fig, ax = plt.subplots(2, 1, gridspec_kw={'height_ratios': [3, 1]}, figsize=(5,6.25))
 ax[0].axis('off')
@@ -85,8 +95,11 @@ plt.margins(x=0)
 plt.subplots_adjust(left=0.15, bottom=0.1, right=1.0, top=1.0, wspace=0.4, hspace=0.0)
 ax[0].imshow(empty40kb,cmap = "magma_r", vmax = 7)
 ax[1].plot(x, y)
-ax[1].set_xlabel("Bin Number")
+ax[1].set_xlabel("Base Pair on Chromosome 15")
 ax[1].set_ylabel("Insulation Score")
+ax[1].set_xticks(numpy.arange(0,74+1, 74/6), numpy.arange(10400000, 13400000+1, 500000))
+plt.xticks(rotation = 45)
+fig.tight_layout()
 plt.savefig("insulation.png")
 plt.show()
 
