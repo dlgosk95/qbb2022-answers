@@ -47,30 +47,49 @@ pop = 100
 
 # plot(p, pop, 'part2.png')
 
-# # fig, ax
-# ax = plt.hist(multiple(0.5, 100, 1000), bins= 100)
+fix, ax = plt.subplots()
+
+# plt.hist(multiple(0.5, 100, 1000), bins= 100)
+# ax.set_ylabel("Density")
+# ax.set_xlabel("Number of Generation for Fixation")
+# plt.savefig("part3.png")
 # plt.show()
 
 
-population = [100, 1000, 10000, 100000, 1000000]
-fixation = []
-for i in population:
-    avg = np.mean(multiple(0.5, i, 5))
-    fixation.append(avg)
-log_pop = np.log10(population)
-log_fix = np.log10(fixation)
-plt.scatter(log_pop, log_fix)
-plt.show()
-
-# frequency = []
+# population = [100, 1000, 10000, 100000, 1000000, 10000000]
 # fixation = []
-# for i in frequency:
-#     avg = np.mean(multiple(0.5, i, 5))
+# for i in population:
+#     avg = np.mean(multiple(0.5, i, 1))
 #     fixation.append(avg)
 # log_pop = np.log10(population)
-# log_fix = np.log10(avg)
+# log_fix = np.log10(fixation)
 # plt.scatter(log_pop, log_fix)
+# ax.set_ylabel("Number of Generation for Fixation (Log10)")
+# ax.set_xlabel("Population size (Log10)")
+# ax.set_xticks([2, 3, 4, 5, 6,7])
+# plt.savefig("part4.png")
 # plt.show()
+
+frequency = np.arange(0, 1, 0.1)
+# print(frequency)
+fixation = []
+standard_dev = []
+full_sims = []
+for i in frequency:
+    sim_part5 = multiple(i, 100, 100)
+    full_sims.append(sim_part5)
+    avg = np.mean(sim_part5)
+    std = np.std(sim_part5)
+    fixation.append(avg)
+    standard_dev.append(std)
+ax.set_title("Wright Fisher simulation with varing starting frequency and population size of 100")
+ax.set_ylabel("Number of Generation for Fixation")
+ax.set_xlabel("Starting Frequency")
+# plt.violinplot(dataset=full_sims, positions=frequency) ## options width
+# plt.scatter(frequency, fixation)
+plt.errorbar(frequency, fixation, yerr=standard_dev)
+plt.savefig("part5_1.png")
+plt.show()
 
 
 
